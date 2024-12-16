@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licitaciones</title>
+    <title>Selecciona tu tipo de usuario</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Listado de Licitaciones</h1>
-        <table id="licitaciones-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos se llenarán dinámicamente -->
-            </tbody>
-        </table>
+        <h1>Bienvenido al sistema de licitaciones</h1>
+        <p>Por favor, selecciona tu tipo de usuario para continuar:</p>
+        
+        <form action="user-selection" method="POST">
+            <label for="role">Selecciona tu rol:</label>
+            <select name="role" id="role">
+                <option value="admin">Administrador</option>
+                <option value="user">Usuario</option>
+                <option value="licitador">Licitador</option>
+            </select>
+            <button type="submit">Seleccionar</button>
+        </form>
     </div>
-    <script src="js/script.js"></script>
 </body>
 </html>
