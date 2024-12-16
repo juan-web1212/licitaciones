@@ -3,15 +3,26 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #121212; /* Color de fondo de respaldo */
+    color: #f5f5f5; /* Letras blancas */
+    background-image: url('../imagenes/imagen4.jpg'); /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Imagen fija al hacer scroll */
 }
 
+/* Contenedor general */
 .container {
     width: 90%;
     margin: 20px auto;
     text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Fondo negro translúcido para destacar el contenido */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para resaltar */
 }
 
+/* Encabezado */
 h1 {
     color: #4CAF50;
     margin-bottom: 20px;
@@ -22,28 +33,24 @@ table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #1e1e1e; /* Fondo oscuro para la tabla */
+    color: #f5f5f5; /* Texto blanco */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 table th, table td {
-    border: 1px solid #ddd;
+    border: 1px solid #333; /* Bordes sutiles oscuros */
     padding: 10px;
     text-align: center;
 }
 
 table th {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Verde para encabezados */
     color: white;
-    cursor: pointer; /* Cursor puntero para indicar interacción */
+    cursor: pointer;
     position: relative;
 }
 
-table th:hover {
-    background-color: #45a049;
-}
-
-/* Flechas de ordenamiento */
 table th::after {
     content: " \21C5"; /* Flecha arriba/abajo */
     font-size: 12px;
@@ -51,22 +58,24 @@ table th::after {
     color: #ddd;
 }
 
-table th:hover::after {
-    color: #fff; /* Resalta la flecha cuando pasas el mouse */
-}
-
-/* Alternar filas */
 table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #2a2a2a; /* Fondo más oscuro para filas pares */
 }
 
-/* Estilos para los inputs de filtro */
+table tr:hover {
+    background-color: #333; /* Resaltado al pasar el mouse */
+    transition: background-color 0.2s ease;
+}
+
+/* Input para filtros */
 table input {
     width: 90%;
     padding: 5px;
     margin: 5px 0;
     box-sizing: border-box;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
+    background-color: #1e1e1e; /* Fondo oscuro */
+    color: white;
     border-radius: 4px;
 }
 
@@ -85,11 +94,10 @@ button#salirBtn {
 
 button#salirBtn:hover {
     background-color: #e94e2b;
-    transform: scale(1.05); /* Pequeño efecto de crecimiento */
+    transform: scale(1.05);
 }
 
-/* Resaltar fila al pasar el mouse */
-table tr:hover {
-    background-color: #e0f7e0;
-    transition: background-color 0.2s ease;
+/* Resaltar encabezados de la tabla al pasar el mouse */
+table th:hover {
+    background-color: #388e3c; /* Verde más oscuro */
 }
