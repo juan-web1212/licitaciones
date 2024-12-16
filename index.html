@@ -54,11 +54,11 @@
         <div class="image-container">
             <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" />
         </div>
-    </div>
 
-    <!-- Footer con el texto "Echo por Juan Sanchez" -->
-    <div class="footer">
-        <p>Echo por Juan Sanchez</p>
+        <!-- Footer sobre la imagen -->
+        <div class="footer">
+            <p>Echo por Juan Sanchez</p>
+        </div>
     </div>
 
     <style>
@@ -136,10 +136,15 @@
 
         /* Estilos para el footer */
         .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
             text-align: center;
-            margin-top: 30px;
-            color: #555;
+            color: white;
             font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor visibilidad */
+            padding: 5px;
+            box-sizing: border-box;
         }
 
         /* Para evitar desbordamiento de la página */
