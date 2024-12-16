@@ -14,8 +14,10 @@ body {
 
 h1 {
     color: #4CAF50;
+    margin-bottom: 20px;
 }
 
+/* Estilos para las tablas */
 table {
     width: 100%;
     margin-top: 20px;
@@ -33,19 +35,42 @@ table th, table td {
 table th {
     background-color: #4CAF50;
     color: white;
+    cursor: pointer; /* Cursor puntero para indicar interacción */
+    position: relative;
 }
 
+table th:hover {
+    background-color: #45a049;
+}
+
+/* Flechas de ordenamiento */
+table th::after {
+    content: " \21C5"; /* Flecha arriba/abajo */
+    font-size: 12px;
+    margin-left: 5px;
+    color: #ddd;
+}
+
+table th:hover::after {
+    color: #fff; /* Resalta la flecha cuando pasas el mouse */
+}
+
+/* Alternar filas */
 table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+/* Estilos para los inputs de filtro */
 table input {
     width: 90%;
     padding: 5px;
     margin: 5px 0;
     box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
+/* Botón Salir */
 button#salirBtn {
     margin-top: 20px;
     background-color: #FF5733;
@@ -55,8 +80,16 @@ button#salirBtn {
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 button#salirBtn:hover {
     background-color: #e94e2b;
+    transform: scale(1.05); /* Pequeño efecto de crecimiento */
+}
+
+/* Resaltar fila al pasar el mouse */
+table tr:hover {
+    background-color: #e0f7e0;
+    transition: background-color 0.2s ease;
 }
