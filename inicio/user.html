@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuario - Página de Licitaciones</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Usuarios - Licitaciones</title>
+    <link rel="stylesheet" href="../css/user-styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenido Usuario</h1>
-        <p>Aquí puedes gestionar tus licitaciones.</p>
-        <a href="../index.html">Volver al inicio</a>
+        <h1>Usuarios - Licitaciones</h1>
+        
+        <!-- Tabla de Licitadores -->
+        <h2>Licitadores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Licitador</th>
+                    <th>Licitaciones Vistas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Licitador 1</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Licitador 2</td>
+                    <td>3</td>
+                </tr>
+                <!-- Más filas de licitadores aquí -->
+            </tbody>
+        </table>
+
+        <!-- Tabla de Productos -->
+        <h2>Productos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Precio</th>
+                    <th>ID de Licitación</th>
+                    <th>Fecha de Vencimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Producto A</td>
+                    <td>$100</td>
+                    <td>123</td>
+                    <td>2024-12-20</td>
+                </tr>
+                <tr>
+                    <td>Producto B</td>
+                    <td>$150</td>
+                    <td>124</td>
+                    <td>2024-12-25</td>
+                </tr>
+                <!-- Más filas de productos aquí -->
+            </tbody>
+        </table>
+
     </div>
 </body>
 </html>
