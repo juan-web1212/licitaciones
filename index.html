@@ -6,13 +6,16 @@
     <title>Selecciona tu tipo de usuario</title>
     <link rel="stylesheet" href="css/styles.css">
     <script>
-        // Función para cambiar las imágenes
+        // Función para cambiar las imágenes automáticamente
         let imagenIndex = 1;
         function cambiarImagen() {
             imagenIndex = (imagenIndex % 3) + 1;  // Cambia entre 1, 2 y 3
             const imagen = document.getElementById('imagenPrincipal');
             imagen.src = `carpetas/imagen${imagenIndex}.jpg`;  // Cambia la fuente de la imagen
         }
+
+        // Iniciar cambio automático de imágenes
+        setInterval(cambiarImagen, 5000);  // Cambia cada 5 segundos
 
         // Función para redirigir según el tipo de usuario
         function redirigirPagina() {
@@ -45,17 +48,10 @@
         <!-- Imagen que cambia -->
         <div class="image-container">
             <img id="imagenPrincipal" src="carpetas/imagen1.jpg" alt="Imagen Principal" width="100%" />
-            <button onclick="cambiarImagen()">Cambiar Imagen</button>
         </div>
 
         <h1>Bienvenido al sistema de licitaciones</h1>
         <p>Por favor, ingresa tu tipo de usuario para continuar:</p>
-        
-        <form onsubmit="event.preventDefault(); redirigirPagina();">
-            <label for="role">Ingresa tu rol:</label>
-            <input type="text" name="role" id="role" placeholder="Escribe 'admin', 'user' o 'licitador'" required>
-            <button type="submit">Seleccionar</button>
-        </form>
     </div>
 
     <style>
