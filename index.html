@@ -6,10 +6,18 @@
     <title>Selecciona tu tipo de usuario</title>
     <link rel="stylesheet" href="css/styles.css">
     <script>
+        // Función para cambiar las imágenes
+        let imagenIndex = 1;
+        function cambiarImagen() {
+            imagenIndex = (imagenIndex % 3) + 1;  // Cambia entre 1, 2 y 3
+            const imagen = document.getElementById('imagenPrincipal');
+            imagen.src = `carpetas/imagen${imagenIndex}.jpg`;  // Cambia la fuente de la imagen
+        }
+
+        // Función para redirigir según el tipo de usuario
         function redirigirPagina() {
             const rol = document.getElementById("role").value.trim().toLowerCase();
             
-            // Validación para asegurarse de que el valor sea uno de los roles permitidos
             if (rol === "admin") {
                 window.location.href = "inicio/admin.html";  // Redirige a la página del administrador
             } else if (rol === "user") {
@@ -24,8 +32,24 @@
 </head>
 <body>
     <div class="container">
+        <!-- Menú desplegable de Inicio -->
+        <div class="menu">
+            <button onclick="document.getElementById('roleMenu').classList.toggle('show')">Inicio</button>
+            <div id="roleMenu" class="dropdown-content">
+                <label for="role">Ingresa tu rol:</label>
+                <input type="text" name="role" id="role" placeholder="Escribe 'admin', 'user' o 'licitador'" required>
+                <button onclick="redirigirPagina()">Seleccionar</button>
+            </div>
+        </div>
+
+        <!-- Imagen que cambia -->
+        <div class="image-container">
+            <img id="imagenPrincipal" src="carpetas/imagen1.jpg" alt="Imagen Principal" width="100%" />
+            <button onclick="cambiarImagen()">Cambiar Imagen</button>
+        </div>
+
         <h1>Bienvenido al sistema de licitaciones</h1>
-        <p>Por favor, ingresa tu tipo de usuario (admin, user o licitador):</p>
+        <p>Por favor, ingresa tu tipo de usuario para continuar:</p>
         
         <form onsubmit="event.preventDefault(); redirigirPagina();">
             <label for="role">Ingresa tu rol:</label>
@@ -33,5 +57,54 @@
             <button type="submit">Seleccionar</button>
         </form>
     </div>
+
+    <style>
+        /* Estilos para el menú desplegable de inicio */
+        .menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .menu button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu button:hover {
+            background-color: #45a049;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 10px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        /* Estilos para las imágenes */
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </body>
 </html>
