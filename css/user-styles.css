@@ -1,60 +1,77 @@
+/* Estilos básicos */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-color: #121212;
+    color: #f5f5f5;
+    background-image: url('../imagenes/imagen5.jpg'); /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre toda la pantalla */
+    background-position: center;
+    background-attachment: fixed; /* Imagen fija */
 }
 
+/* Contenedor general */
 .container {
-    max-width: 600px;
+    width: 90%;
     margin: 20px auto;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7); /* Fondo translúcido para el contenido */
     padding: 20px;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-h1 {
+/* Encabezado */
+h1, h2 {
+    color: #4CAF50;
+}
+
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+table th, table td {
+    border: 1px solid #333;
+    padding: 10px;
     text-align: center;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form label {
-    margin-top: 10px;
-}
-
-form input, form textarea {
-    padding: 10px;
-    margin: 5px 0 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form button {
-    padding: 10px;
+table th {
     background-color: #4CAF50;
     color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
+    position: relative;
 }
 
-form button:hover {
-    background-color: #45a049;
+table tr:nth-child(even) {
+    background-color: #2a2a2a;
 }
 
-a {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #333;
-    text-decoration: none;
+table tr:hover {
+    background-color: #333;
+    transition: background-color 0.2s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+/* Filtros para las tablas */
+table input {
+    width: 90%;
+    padding: 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 4px;
+}
+
+/* Resaltar encabezados de la tabla al pasar el mouse */
+table th:hover {
+    background-color: #388e3c;
 }
