@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +7,22 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Licitaciones Disponibles</h1>
-    </header>
-    <main>
-        <table id="licitaciones">
+    <div class="container">
+        <h1>Listado de Licitaciones</h1>
+        <table id="licitaciones-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Fecha de Cierre</th>
-                    <th>Acciones</th>
+                    <th>Fecha</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Las licitaciones se generarán dinámicamente con JavaScript -->
+                <!-- Los datos se llenarán dinámicamente -->
             </tbody>
         </table>
-    </main>
-    <footer>
-        <p>Creado por Juan Sanchez</p>
-    </footer>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>
