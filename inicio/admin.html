@@ -16,20 +16,21 @@
         <table id="tablaUsuarios">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Último Ingreso</th>
-                    <th>Licitaciones Vistas</th>
+                    <!-- Tabla de Usuarios -->
+                    <th onclick="ordenarTabla('tablaUsuarios', 0)">ID &#x2195;</th>
+                    <th onclick="ordenarTabla('tablaUsuarios', 1)">Último Ingreso &#x2195;</th>
+                    <th onclick="ordenarTabla('tablaUsuarios', 2)">Licitaciones Vistas &#x2195;</th>
                 </tr>
                 <tr>
                     <th>
-                        <input type="text" id="filtroUsuariosID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaUsuarios', 0)">
+                    <input type="text" id="filtroUsuariosID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaUsuarios', 0)">
+                    </th>
+                <th>
+                    <input type="text" id="filtroUsuariosIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaUsuarios', 1)">
                     </th>
                     <th>
-                        <input type="text" id="filtroUsuariosIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaUsuarios', 1)">
-                    </th>
-                    <th>
-                        <input type="text" id="filtroUsuariosLicitaciones" placeholder="Filtrar Licitaciones" onkeyup="filtrarColumna('tablaUsuarios', 2)">
-                    </th>
+                    <input type="text" id="filtroUsuariosLicitaciones" placeholder="Filtrar Licitaciones" onkeyup="filtrarColumna('tablaUsuarios', 2)">
+                </th>
                 </tr>
             </thead>
             <tbody>
@@ -56,21 +57,21 @@
         <table id="tablaLicitadores">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Último Ingreso</th>
-                    <th>Cantidad de Licitaciones</th>
+                    <th onclick="ordenarTabla('tablaLicitadores', 0)">ID &#x2195;</th>
+                    <th onclick="ordenarTabla('tablaLicitadores', 1)">Último Ingreso &#x2195;</th>
+                    <th onclick="ordenarTabla('tablaLicitadores', 2)">Cantidad de Licitaciones &#x2195;</th>
                 </tr>
                 <tr>
                     <th>
-                        <input type="text" id="filtroLicitadoresID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaLicitadores', 0)">
+                    <input type="text" id="filtroLicitadoresID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaLicitadores', 0)">
                     </th>
-                    <th>
-                        <input type="text" id="filtroLicitadoresIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaLicitadores', 1)">
-                    </th>
-                    <th>
-                        <input type="text" id="filtroLicitadoresCantidad" placeholder="Filtrar Cantidad" onkeyup="filtrarColumna('tablaLicitadores', 2)">
-                    </th>
-                </tr>
+                <th>
+                    <input type="text" id="filtroLicitadoresIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaLicitadores', 1)">
+                </th>
+                <th>
+                    <input type="text" id="filtroLicitadoresCantidad" placeholder="Filtrar Cantidad" onkeyup="filtrarColumna('tablaLicitadores', 2)">
+                </th>
+            </tr>
             </thead>
             <tbody>
                 <tr>
