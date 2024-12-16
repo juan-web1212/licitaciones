@@ -11,7 +11,7 @@
         function cambiarImagen() {
             imagenIndex = (imagenIndex % 3) + 1;  // Cambia entre 1, 2 y 3
             const imagen = document.getElementById('imagenPrincipal');
-            imagen.src = `carpetas/imagen${imagenIndex}.jpg`;  // Cambia la fuente de la imagen
+            imagen.src = `imagenes/imagen${imagenIndex}.jpg`;  // Cambia la fuente de la imagen
         }
 
         // Iniciar cambio automático de imágenes
@@ -47,7 +47,7 @@
 
         <!-- Imagen que cambia -->
         <div class="image-container">
-            <img id="imagenPrincipal" src="carpetas/imagen1.jpg" alt="Imagen Principal" width="100%" />
+            <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" width="100%" />
         </div>
 
         <h1>Bienvenido al sistema de licitaciones</h1>
