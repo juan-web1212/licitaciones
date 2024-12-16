@@ -35,11 +35,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Imagen que cambia -->
-        <div class="image-container">
-            <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" />
-        </div>
-
         <!-- Menú desplegable de Inicio (moved to top-right) -->
         <div class="menu">
             <button onclick="document.getElementById('roleMenu').classList.toggle('show')">Inicio</button>
@@ -50,10 +45,15 @@
             </div>
         </div>
 
-        <!-- Título y párrafo centrado -->
+        <!-- Título y párrafo centrado sobre la imagen -->
         <div class="text-content">
             <h1>Bienvenido al sistema de licitaciones</h1>
             <p>Por favor, ingresa tu tipo de usuario para continuar:</p>
+        </div>
+
+        <!-- Imagen que cambia -->
+        <div class="image-container">
+            <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" />
         </div>
     </div>
 
@@ -63,6 +63,7 @@
             position: absolute;
             top: 20px;
             right: 20px;  /* Mueve el botón a la parte superior derecha */
+            z-index: 10;
         }
 
         .menu button {
@@ -86,6 +87,7 @@
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
             padding: 10px;
+            margin-top: 10px;  /* Evita que se quede pegado al botón */
         }
 
         .dropdown-content.show {
@@ -96,29 +98,36 @@
         .image-container {
             position: relative;
             width: 100%;
-            height: 400px;  /* Altura fija para la imagen */
+            height: 100vh;  /* Ocupa toda la altura de la pantalla */
             overflow: hidden;
         }
 
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;  /* Hace que la imagen se recorte si es necesario */
+            object-fit: cover;  /* Hace que la imagen ocupe todo el espacio sin distorsionarse */
         }
 
-        /* Estilos para el texto centrado */
+        /* Estilos para el texto centrado sobre la imagen */
         .text-content {
             text-align: center;
             position: absolute;
-            top: 50%;  /* Centra el texto verticalmente */
+            top: 20%;  /* Centrado a 20% desde la parte superior */
             left: 50%;  /* Centra el texto horizontalmente */
-            transform: translate(-50%, -50%);  /* Asegura que esté perfectamente centrado */
+            transform: translateX(-50%);  /* Asegura que esté perfectamente centrado */
             color: white;
             z-index: 10;
         }
 
         .text-content h1, .text-content p {
             margin: 0;
+        }
+
+        /* Para evitar desbordamiento de la página */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;  /* Evita el desplazamiento horizontal */
         }
     </style>
 </body>
