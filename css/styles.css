@@ -1,44 +1,29 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     color: #333;
 }
 
-header {
-    background: #007BFF;
-    color: white;
-    padding: 1rem;
+h1 {
+    color: #007BFF;
     text-align: center;
 }
 
 table {
     width: 80%;
-    margin: 2rem auto;
+    margin: 20px auto;
     border-collapse: collapse;
-    background: white;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
 }
 
 th, td {
-    padding: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
 th {
-    background: #f4f4f4;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: #007BFF;
+    background-color: #007BFF;
     color: white;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
