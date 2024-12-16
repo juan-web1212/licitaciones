@@ -35,7 +35,12 @@
 </head>
 <body>
     <div class="container">
-        <!-- Menú desplegable de Inicio -->
+        <!-- Imagen que cambia -->
+        <div class="image-container">
+            <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" width="100%" />
+        </div>
+
+        <!-- Menú desplegable de Inicio (moved to top-right) -->
         <div class="menu">
             <button onclick="document.getElementById('roleMenu').classList.toggle('show')">Inicio</button>
             <div id="roleMenu" class="dropdown-content">
@@ -45,12 +50,8 @@
             </div>
         </div>
 
-        <!-- Imagen que cambia -->
-        <div class="image-container">
-            <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" width="100%" />
-        </div>
-
         <h1>Bienvenido al sistema de licitaciones</h1>
+        <p>Por favor, ingresa tu tipo de usuario para continuar:</p>
     </div>
 
     <style>
@@ -58,7 +59,7 @@
         .menu {
             position: absolute;
             top: 20px;
-            left: 20px;
+            right: 20px;  /* Mueve el botón a la parte superior derecha */
         }
 
         .menu button {
@@ -91,7 +92,7 @@
         /* Estilos para las imágenes */
         .image-container {
             text-align: center;
-            margin: 20px 0;
+            margin-bottom: 20px;  /* Se añadió un margen para separar la imagen del título */
         }
 
         img {
