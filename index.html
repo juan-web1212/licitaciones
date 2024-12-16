@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selecciona tu tipo de usuario</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function redirigirPagina() {
+            const rol = document.getElementById("role").value;
+            if (rol === "admin") {
+                window.location.href = "admin.html";  // Redirige a la página del administrador
+            } else if (rol === "user") {
+                window.location.href = "user.html";  // Redirige a la página del usuario
+            } else if (rol === "licitador") {
+                window.location.href = "licitador.html";  // Redirige a la página del licitador
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Bienvenido al sistema de licitaciones</h1>
         <p>Por favor, selecciona tu tipo de usuario para continuar:</p>
         
-        <form action="user-selection" method="POST">
+        <form onsubmit="event.preventDefault(); redirigirPagina();">
             <label for="role">Selecciona tu rol:</label>
             <select name="role" id="role">
                 <option value="admin">Administrador</option>
