@@ -135,4 +135,42 @@
         e.target.reset();
     });
 </script>
+    <script type="module">
+    import { guardarUsuario, guardarLicitador } from '../app.js';
+
+    // Manejo del formulario de usuarios
+    document.getElementById('formUsuarios').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const user = document.getElementById('user').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (!nombre || !user || !password) {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
+
+        guardarUsuario({ nombre, user, password, email });
+        alert('Usuario guardado correctamente.');
+        e.target.reset();
+    });
+
+    // Manejo del formulario de licitadores
+    document.getElementById('formLicitadores').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const empresa = document.getElementById('empresa').value.trim();
+
+        if (!empresa) {
+            alert('Por favor, ingresa el nombre de la empresa.');
+            return;
+        }
+
+        guardarLicitador({ empresa });
+        alert('Licitador guardado correctamente.');
+        e.target.reset();
+    });
+</script>
 </html>
