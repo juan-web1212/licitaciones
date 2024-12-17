@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios - Licitaciones</title>
     <link rel="stylesheet" href="../css/user-styles.css">
-    <script src="../js/user.js"></script>
+    <script type="module" src="../js/user.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,26 +17,14 @@
         <table id="licitadoresTable">
             <thead>
                 <tr>
-                    <th>Nombre del Licitador <span onclick="ordenarTabla('licitadoresTable', 0)">⬆️⬇️</span></th>
-                    <th>Licitaciones Presentadas <span onclick="ordenarTabla('licitadoresTable', 1)">⬆️⬇️</span></th>
-                    <th>ID de Licitación <span onclick="ordenarTabla('licitadoresTable', 2)">⬆️⬇️</span></th>
+                    <th>Nombre del Licitador</th>
+                    <th>Licitaciones Presentadas</th>
+                    <th>ID de Licitación</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Licitador 1</td>
-                    <td>5</td>
-                    <td>123</td>
-                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
-                </tr>
-                <tr>
-                    <td>Licitador 2</td>
-                    <td>3</td>
-                    <td>124</td>
-                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
-                </tr>
-                <!-- Más filas de licitadores aquí -->
+                <!-- Filas generadas dinámicamente -->
             </tbody>
         </table>
 
@@ -46,38 +34,25 @@
         <table id="productosTable">
             <thead>
                 <tr>
-                    <th>Nombre del Producto <span onclick="ordenarTabla('productosTable', 0)">⬆️⬇️</span></th>
-                    <th>Precio <span onclick="ordenarTabla('productosTable', 1)">⬆️⬇️</span></th>
-                    <th>ID de Licitación <span onclick="ordenarTabla('productosTable', 2)">⬆️⬇️</span></th>
-                    <th>Fecha de Vencimiento <span onclick="ordenarTabla('productosTable', 3)">⬆️⬇️</span></th>
-                    <th>Nombre del Licitador <span onclick="ordenarTabla('productosTable', 4)">⬆️⬇️</span></th>
+                    <th>Nombre del Producto</th>
+                    <th>Precio</th>
+                    <th>ID de Licitación</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Nombre del Licitador</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Producto A</td>
-                    <td>$100</td>
-                    <td>123</td>
-                    <td>2024-12-20</td>
-                    <td>Licitador 1</td>
-                </tr>
-                <tr>
-                    <td>Producto B</td>
-                    <td>$150</td>
-                    <td>124</td>
-                    <td>2024-12-25</td>
-                    <td>Licitador 2</td>
-                </tr>
-                <!-- Más filas de productos aquí -->
+                <!-- Filas generadas dinámicamente -->
             </tbody>
         </table>
 
+        <!-- Botones de acción -->
         <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
         <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 
     <!-- Pop-up para ingresar número de centro de costo -->
-    <div id="popupCentroCosto" class="popup">
+    <div id="popupCentroCosto" class="popup" style="display:none;">
         <div class="popup-content">
             <span class="close" onclick="cerrarPopup()">&times;</span>
             <h3>Ingrese el número de Centro de Costo</h3>
