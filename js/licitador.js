@@ -92,7 +92,7 @@ document.getElementById('salirBtn').addEventListener('click', function (event) {
     }
 });
 // Definir la función guardarProductos
-function guardarProductos() {
+function guardarproductos() {
     // Lógica para guardar los productos
     console.log("Productos guardados.");
     // Aquí puedes agregar el código para procesar los productos y guardarlos en la base de datos
