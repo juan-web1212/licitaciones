@@ -20,3 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al obtener licitaciones:', error);
         });
 });
+function redirigirPagina() {
+    const role = document.getElementById('role').value.toLowerCase(); // Obtiene y convierte el rol a minúsculas
+    let url = '';
+
+    // Define las rutas para cada rol
+    switch (role) {
+        case 'admin':
+            url = 'admin.html'; // Página para administradores
+            break;
+        case 'user':
+            url = 'user.html'; // Página para usuarios
+            break;
+        case 'licitador':
+            url = 'licitador.html'; // Página para licitadores
+            break;
+        default:
+            alert('Por favor, escribe un rol válido: admin, user o licitador');
+            return; // No redirige si el rol no es válido
+    }
+
+    // Redirige a la página correspondiente
+    window.location.href = url;
+};
