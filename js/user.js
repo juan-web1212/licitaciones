@@ -134,17 +134,6 @@ function checkLicitadores() {
         acceptButton.style.display = 'none';
     }
 }
-
-// Función para mostrar el pop-up del centro de costo
-function mostrarCentroCostoPopup() {
-    const checkboxes = document.querySelectorAll('.acceptCheckbox:checked');
-    if (checkboxes.length === 0) {
-        alert("Por favor, selecciona al menos un licitador.");
-        return;
-    }
-    document.getElementById('popupCentroCosto').style.display = 'flex';
-}
-
 // Función para cerrar el pop-up
 function cerrarPopup() {
     document.getElementById('popupCentroCosto').style.display = 'none';
