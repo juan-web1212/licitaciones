@@ -38,7 +38,7 @@ document.getElementById('aceptarBtn').addEventListener('click', function() {
     if (datosCompletos) {
         alert("¡Licitación enviada con éxito!");
         // Aquí puedes añadir lógica para guardar la licitación en la base de datos
-        window.close(); // Cierra la página tras la validación exitosa
+       window.location.href = "../index.html";
     } else {
         alert("Por favor, completa al menos un producto con un precio válido (mayor o igual a 0).");
     }
