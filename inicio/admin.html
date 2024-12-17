@@ -3,99 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador - Página de Licitaciones</title>
-    <link rel="stylesheet" href="../css/admin-styles.css">
+    <title>Admin - Gestión de Usuarios y Licitadores</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Bienvenido Administrador1</h1>
-        <p>Aquí puedes ver y aprobar las licitaciones.</p>
+    <h1>Administrador - Gestión de Usuarios y Licitadores</h1>
 
-        <!-- Tabla de Usuarios -->
-        <h2>Tabla de Usuarios</h2>
-        <table id="tablaUsuarios">
-            <thead>
-                <tr>
-                    <!-- Tabla de Usuarios -->
-                    <th onclick="ordenarTabla('tablaUsuarios', 0)">ID &#x2195;</th>
-                    <th onclick="ordenarTabla('tablaUsuarios', 1)">Último Ingreso &#x2195;</th>
-                    <th onclick="ordenarTabla('tablaUsuarios', 2)">Licitaciones Vistas &#x2195;</th>
-                </tr>
-                <tr>
-                    <th>
-                    <input type="text" id="filtroUsuariosID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaUsuarios', 0)">
-                    </th>
-                <th>
-                    <input type="text" id="filtroUsuariosIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaUsuarios', 1)">
-                    </th>
-                    <th>
-                    <input type="text" id="filtroUsuariosLicitaciones" placeholder="Filtrar Licitaciones" onkeyup="filtrarColumna('tablaUsuarios', 2)">
-                </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>U001</td>
-                    <td>2024-06-01 12:30</td>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <td>U002</td>
-                    <td>2024-06-02 09:15</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>U003</td>
-                    <td>2024-06-03 16:00</td>
-                    <td>25</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Tabla de Licitadores -->
-        <h2>Tabla de Licitadores</h2>
-        <table id="tablaLicitadores">
-            <thead>
-                <tr>
-                    <th onclick="ordenarTabla('tablaLicitadores', 0)">ID &#x2195;</th>
-                    <th onclick="ordenarTabla('tablaLicitadores', 1)">Último Ingreso &#x2195;</th>
-                    <th onclick="ordenarTabla('tablaLicitadores', 2)">Cantidad de Licitaciones &#x2195;</th>
-                </tr>
-                <tr>
-                    <th>
-                    <input type="text" id="filtroLicitadoresID" placeholder="Filtrar ID" onkeyup="filtrarColumna('tablaLicitadores', 0)">
-                    </th>
-                <th>
-                    <input type="text" id="filtroLicitadoresIngreso" placeholder="Filtrar Último Ingreso" onkeyup="filtrarColumna('tablaLicitadores', 1)">
-                </th>
-                <th>
-                    <input type="text" id="filtroLicitadoresCantidad" placeholder="Filtrar Cantidad" onkeyup="filtrarColumna('tablaLicitadores', 2)">
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>L001</td>
-                    <td>2024-06-01 11:45</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>L002</td>
-                    <td>2024-06-02 14:20</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>L003</td>
-                    <td>2024-06-03 10:10</td>
-                    <td>8</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Botón de Salir -->
-        <button id="salirBtn">Salir</button>
+    <div>
+        <!-- Formulario para Alta de Usuarios -->
+        <h2>Alta de Usuarios</h2>
+        <form id="formUsuario">
+            <label for="nombreUsuario">Nombre:</label>
+            <input type="text" id="nombreUsuario" placeholder="Nombre del usuario" required><br>
+            <label for="userUsuario">Usuario:</label>
+            <input type="text" id="userUsuario" placeholder="Nombre de usuario" required><br>
+            <label for="passUsuario">Contraseña:</label>
+            <input type="password" id="passUsuario" placeholder="Contraseña" required><br>
+            <label for="emailUsuario">Correo:</label>
+            <input type="email" id="emailUsuario" placeholder="Correo electrónico" required><br>
+            <button type="button" id="btnGuardarUsuario">Guardar Usuario</button>
+        </form>
     </div>
 
-    <script src="../js/admin-script.js"></script>
+    <div>
+        <!-- Formulario para Alta de Licitadores -->
+        <h2>Alta de Licitadores</h2>
+        <form id="formLicitador">
+            <label for="nombreEmpresa">Nombre de la Empresa:</label>
+            <input type="text" id="nombreEmpresa" placeholder="Nombre de la empresa" required><br>
+            <button type="button" id="btnGuardarLicitador">Guardar Licitador</button>
+        </form>
+    </div>
+
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "TU_API_KEY",
+            authDomain: "TU_AUTH_DOMAIN",
+            databaseURL: "TU_DATABASE_URL",
+            projectId: "TU_PROJECT_ID",
+            storageBucket: "TU_STORAGE_BUCKET",
+            messagingSenderId: "TU_MESSAGING_SENDER_ID",
+            appId: "TU_APP_ID"
+        };
+
+        // Inicializar Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Función para guardar usuarios en Firebase
+        document.getElementById("btnGuardarUsuario").addEventListener("click", function() {
+            const nombre = document.getElementById("nombreUsuario").value.trim();
+            const user = document.getElementById("userUsuario").value.trim();
+            const pass = document.getElementById("passUsuario").value.trim();
+            const email = document.getElementById("emailUsuario").value.trim();
+
+            if (nombre && user && pass && email) {
+                const nuevoUsuarioId = database.ref().child("usuarios").push().key;
+                database.ref("usuarios/" + nuevoUsuarioId).set({
+                    id: nuevoUsuarioId,
+                    nombre: nombre,
+                    user: user,
+                    pass: pass,
+                    email: email
+                }).then(() => {
+                    alert("Usuario guardado con éxito");
+                    document.getElementById("formUsuario").reset();
+                }).catch(error => {
+                    alert("Error al guardar el usuario: " + error.message);
+                });
+            } else {
+                alert("Por favor, completa todos los campos.");
+            }
+        });
+
+        // Función para guardar licitadores en Firebase
+        document.getElementById("btnGuardarLicitador").addEventListener("click", function() {
+            const nombreEmpresa = document.getElementById("nombreEmpresa").value.trim();
+
+            if (nombreEmpresa) {
+                const nuevoLicitadorId = database.ref().child("licitadores").push().key;
+                database.ref("licitadores/" + nuevoLicitadorId).set({
+                    id: nuevoLicitadorId,
+                    nombreEmpresa: nombreEmpresa
+                }).then(() => {
+                    alert("Licitador guardado con éxito");
+                    document.getElementById("formLicitador").reset();
+                }).catch(error => {
+                    alert("Error al guardar el licitador: " + error.message);
+                });
+            } else {
+                alert("Por favor, completa todos los campos.");
+            }
+        });
+    </script>
 </body>
 </html>
