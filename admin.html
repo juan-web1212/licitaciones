@@ -8,12 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <!-- Formulario y contenido para administrador -->
+        <!-- Formulario para registrar un nuevo usuario -->
         <form id="formUsuario">
-            <input type="text" id="username" placeholder="Nombre de usuario">
-            <input type="password" id="password" placeholder="Contraseña">
-            <button type="submit">Registrar Usuario1</button>
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Registrar Usuario</button>
         </form>
+
+        <!-- Mensajes de estado -->
+        <div id="message"></div>
 
         <!-- Cargando el script de Firebase -->
         <script type="module">
@@ -40,7 +43,7 @@
             // Función para guardar un nuevo usuario
             function guardarUsuario(user) {
                 const userRef = ref(database, 'usuarios');  // Referencia a la ruta 'usuarios'
-                push(userRef, user);  // Guarda el usuario
+                return push(userRef, user);  // Devuelve la promesa
             }
 
             // Manejo del formulario
@@ -52,7 +55,14 @@
                     password: document.getElementById('password').value,
                 };
 
-                guardarUsuario(user);  // Llamamos a la función para guardar el usuario
+                guardarUsuario(user)
+                    .then(() => {
+                        document.getElementById('message').innerHTML = "<p>Usuario registrado con éxito.</p>";
+                        document.getElementById('formUsuario').reset();  // Limpiar el formulario
+                    })
+                    .catch((error) => {
+                        document.getElementById('message').innerHTML = "<p>Error al registrar el usuario: " + error.message + "</p>";
+                    });
             });
         </script>
     </div>
