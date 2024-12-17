@@ -6,11 +6,12 @@
     <title>Admin - Tenders</title>
 <!-- Firebase SDK -->
 <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-  import { getDatabase } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
+        // Importar Firebase SDK modular
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-  // Configuración de Firebase
-  const firebaseConfig = {
+        // Configuración de Firebase
+        const firebaseConfig = {
             apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
             authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
             databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
