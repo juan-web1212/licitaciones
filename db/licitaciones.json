@@ -1,0 +1,10 @@
+// licitaciones.json
+[
+    {
+        "id": 101,
+        "producto": "Producto 1",
+        "precio": 100,
+        "id_licitador": 1,
+        "fecha": "2024-12-16T10:00:00Z"
+    }
+]
