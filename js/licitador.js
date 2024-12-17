@@ -40,3 +40,14 @@ document.getElementById('aceptarBtn').addEventListener('click', function() {
         alert("Por favor, completa al menos un producto con un precio válido (mayor o igual a 0).");
     }
 });
+// Función para mostrar la confirmación de salida
+document.getElementById('salirBtn').addEventListener('click', function(event) {
+    // Preguntar al usuario si realmente quiere salir
+    const confirmarSalida = confirm("¿Estás seguro de que deseas salir?");
+
+    if (!confirmarSalida) {
+        event.preventDefault();  // Prevenir la acción de salir si el usuario cancela
+    } else {
+        window.location.href = "../index.html";  // Redirigir al inicio si el usuario confirma
+    }
+});
