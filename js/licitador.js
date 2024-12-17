@@ -13,6 +13,9 @@ document.getElementById('agregarProductoBtn').addEventListener('click', function
     celdaProducto.innerHTML = '<input type="text" placeholder="Nombre del producto" required>';
     celdaPrecio.innerHTML = '<input type="number" placeholder="Precio" min="0" required>';
     celdaId.innerHTML = 'licitador1';  // Establecer ID como "licitador1" por defecto
+
+    // Mostrar el botón de "Aceptar" solo si se han agregado filas
+    document.getElementById("aceptarBtn").style.display = 'block';
 });
 
 // Función para manejar el evento de "Aceptar" y validar la tabla
@@ -40,14 +43,18 @@ document.getElementById('aceptarBtn').addEventListener('click', function() {
         alert("Por favor, completa al menos un producto con un precio válido (mayor o igual a 0).");
     }
 });
+
 // Función para mostrar la confirmación de salida
 document.getElementById('salirBtn').addEventListener('click', function(event) {
     // Preguntar al usuario si realmente quiere salir
     const confirmarSalida = confirm("¿Estás seguro de que deseas salir?");
-
-    if (!confirmarSalida) {
+    
+    // Si el usuario confirma la salida
+    if (confirmarSalida) {
+        window.location.href = "../index.html";  // Redirigir al inicio
+    }
+    // Si el usuario cancela, no se hace nada
+    else {
         event.preventDefault();  // Prevenir la acción de salir si el usuario cancela
-    } else {
-        window.location.href = "../index.html";  // Redirigir al inicio si el usuario confirma
     }
 });
