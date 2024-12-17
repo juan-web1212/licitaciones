@@ -71,12 +71,3 @@ document.getElementById('salirBtn').addEventListener('click', function () {
         window.location.href = "../index.html";
     }
 });
-export function guardarUsuario(user) {
-    const userRef = database.ref('usuarios');
-    userRef.push(user);
-}
-
-export function guardarLicitador(licitador) {
-    const licitadorRef = database.ref('licitadores');
-    licitadorRef.push(licitador);
-};
