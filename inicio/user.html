@@ -28,13 +28,13 @@
                     <td>Licitador 1</td>
                     <td>5</td>
                     <td>123</td>
-                    <td><input type="checkbox" class="acceptCheckbox"></td>
+                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
                 </tr>
                 <tr>
                     <td>Licitador 2</td>
                     <td>3</td>
                     <td>124</td>
-                    <td><input type="checkbox" class="acceptCheckbox"></td>
+                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
                 </tr>
                 <!-- Más filas de licitadores aquí -->
             </tbody>
@@ -73,7 +73,7 @@
         </table>
 
         <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
-        <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()">Aceptar</button>
+        <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 
     <!-- Pop-up para ingresar número de centro de costo -->
@@ -83,6 +83,7 @@
             <h3>Ingrese el número de Centro de Costo</h3>
             <input type="text" id="centroCostoInput" placeholder="Centro de Costo">
             <button onclick="finalizarCompra()">Completar Compra</button>
+            <button onclick="cerrarPopup()" class="cancelarBtn">Cancelar</button>
         </div>
     </div>
 </body>
