@@ -114,6 +114,7 @@
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
                         <td>
                             <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
+                            <button onclick="modificarUsuario('${childSnapshot.key}')">Modificar</button>
                         </td>
                     </tr>`;
                     tablaUsuarios.innerHTML += row;
@@ -122,8 +123,8 @@
         }
 
         // Eliminar usuario
-        function eliminarUsuario(id) {
-            const userRef = ref(database, `usuarios/${id}`);
+        function eliminarUsuario(${childSnapshot.key}) {
+            const userRef = ref(database, `usuarios/${childSnapshot.key}`);
             remove(userRef)
                 .then(() => {
                     alert('Usuario eliminado con éxito.');
@@ -175,6 +176,7 @@
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
                         <td>
                             <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
+                            <button onclick="modificarUsuario('${childSnapshot.key}')">Modificar</button>
                         </td>
                     </tr>`;
                     tablaLicitadores.innerHTML += row;
