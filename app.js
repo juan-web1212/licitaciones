@@ -19,3 +19,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+// Guardar usuarios en Firebase
+function guardarUsuario(user) {
+    const userRef = database.ref('usuarios');
+    userRef.push(user);
+}
+
+// Guardar licitadores en Firebase
+function guardarLicitador(licitador) {
+    const licitadorRef = database.ref('licitadores');
+    licitadorRef.push(licitador);
+};
