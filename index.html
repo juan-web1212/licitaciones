@@ -19,7 +19,7 @@
 </div>
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones1</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
         </div>
 
         <!-- Imagen -->
@@ -62,6 +62,29 @@
             imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
         }
         setInterval(cambiarImagen, 5000);
+        function redirigirPagina() {
+    const role = document.getElementById('role').value.toLowerCase(); // Obtiene y convierte el rol a minúsculas
+    let url = '';
+
+    // Define las rutas para cada rol
+    switch (role) {
+        case 'admin':
+            url = 'admin.html'; // Página para administradores
+            break;
+        case 'user':
+            url = 'user.html'; // Página para usuarios
+            break;
+        case 'licitador':
+            url = 'licitador.html'; // Página para licitadores
+            break;
+        default:
+            alert('Por favor, escribe un rol válido: admin, user o licitador');
+            return; // No redirige si el rol no es válido
+    }
+
+    // Redirige a la página correspondiente
+    window.location.href = url;
+};
     </script>
 </body>
 </html>
