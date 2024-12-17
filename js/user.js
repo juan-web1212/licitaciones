@@ -134,11 +134,6 @@ function checkLicitadores() {
         acceptButton.style.display = 'none';
     }
 }
-// Función para cerrar el pop-up
-function cerrarPopup() {
-    document.getElementById('popupCentroCosto').style.display = 'none';
-}
-
 // Función para completar la compra
 function finalizarCompra() {
     const centroCosto = document.getElementById('centroCostoInput').value;
