@@ -123,20 +123,16 @@
         }
 
         // Eliminar usuario
-        function eliminarLicitador(id) {
-            const licitadorRef = ref(database, `licitadores/${id}`);
-            remove(licitadorRef)
+        function eliminarUsuario(id) {
+            const userRef = ref(database, `usuarios/${id}`);
+            remove(userRef)
                 .then(() => {
-                    alert('Licitador eliminado con éxito.');
-                    cargarLicitadores();
+                    alert('Usuario eliminado con éxito.');
+                    cargarUsuarios();
                 })
                 .catch((error) => {
-                    alert('Error al eliminar licitador: ' + error.message);
+                    alert('Error al eliminar usuario: ' + error.message);
                 });
-}
-
-// Asegúrate de asignar la función al `window` para hacerla global
-window.eliminarUsuario = eliminarUsuario;
 
         // Actualizar campo de usuario
         document.querySelector('#tablaUsuarios').addEventListener('input', (e) => {
