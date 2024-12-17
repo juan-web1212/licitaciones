@@ -3,29 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Tenders</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Administrador - Gestión de Usuarios y Licitadores</title>
+    <link rel="stylesheet" href="../css/admin-styles.css">
 </head>
 <body>
     <div class="container">
-        <!-- Formulario para registrar un nuevo usuario -->
+        <h1>Panel de Administración</h1>
+
+        <!-- Formulario para registrar usuarios -->
+        <h2>Registrar Nuevo Usuario</h2>
         <form id="formUsuario">
             <input type="text" id="username" placeholder="Nombre de usuario" required>
             <input type="password" id="password" placeholder="Contraseña" required>
+            <input type="email" id="email" placeholder="Correo Electrónico" required>
             <button type="submit">Registrar Usuario</button>
         </form>
 
         <!-- Mensajes de estado -->
-        <div id="message"></div>
+        <div id="messageUsuarios"></div>
 
-        <!-- Cargando el script de Firebase -->
-        <script type="module">
-            // Importación de los módulos de Firebase
-            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-            import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+        <!-- Tabla de Usuarios -->
+        <h2>Tabla de Usuarios</h2>
+        <table id="tablaUsuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos serán llenados dinámicamente -->
+            </tbody>
+        </table>
 
-            // Configuración de Firebase
-            const firebaseConfig = {
+        <!-- Formulario para registrar licitadores -->
+        <h2>Registrar Nuevo Licitador</h2>
+        <form id="formLicitador">
+            <input type="text" id="nombreLicitador" placeholder="Nombre del Licitador" required>
+            <button type="submit">Registrar Licitador</button>
+        </form>
+
+        <!-- Mensajes de estado -->
+        <div id="messageLicitadores"></div>
+
+        <!-- Tabla de Licitadores -->
+        <h2>Tabla de Licitadores</h2>
+        <table id="tablaLicitadores">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos serán llenados dinámicamente -->
+            </tbody>
+        </table>
+
+        <!-- Botón de Salir -->
+        <button id="salirBtn">Salir</button>
+    </div>
+
+    <!-- Script -->
+    <script type="module">
+        // Importación de Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+
+        // Configuración de Firebase
+        const firebaseConfig = {
             apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
             authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
             databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
@@ -34,37 +81,104 @@
             messagingSenderId: "531013447459",
             appId: "1:531013447459:web:07580f26176abe2fe62696",
             measurementId: "G-E9RJCXF5MC"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Función para guardar un nuevo usuario
+        function guardarUsuario(user) {
+            const userRef = ref(database, 'usuarios');
+            return push(userRef, user);
+        }
+
+        // Función para cargar usuarios
+        function cargarUsuarios() {
+            const userRef = ref(database, 'usuarios');
+            const tablaUsuarios = document.querySelector('#tablaUsuarios tbody');
+            tablaUsuarios.innerHTML = '';
+
+            onValue(userRef, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const user = childSnapshot.val();
+                    const row = `<tr>
+                        <td>${childSnapshot.key}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                    </tr>`;
+                    tablaUsuarios.innerHTML += row;
+                });
+            });
+        }
+
+        // Manejo del formulario de usuarios
+        document.getElementById('formUsuario').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const user = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                email: document.getElementById('email').value,
             };
 
-            // Inicializar Firebase
-            const app = initializeApp(firebaseConfig);
-            const database = getDatabase(app);
+            guardarUsuario(user)
+                .then(() => {
+                    document.getElementById('messageUsuarios').innerHTML = "<p>Usuario registrado con éxito.</p>";
+                    document.getElementById('formUsuario').reset();
+                    cargarUsuarios();
+                })
+                .catch((error) => {
+                    document.getElementById('messageUsuarios').innerHTML = "<p>Error al registrar el usuario: " + error.message + "</p>";
+                });
+        });
 
-            // Función para guardar un nuevo usuario
-            function guardarUsuario(user) {
-                const userRef = ref(database, 'usuarios');  // Referencia a la ruta 'usuarios'
-                return push(userRef, user);  // Devuelve la promesa
-            }
+        // Función para guardar un nuevo licitador
+        function guardarLicitador(licitador) {
+            const licitadorRef = ref(database, 'licitadores');
+            return push(licitadorRef, licitador);
+        }
 
-            // Manejo del formulario
-            document.getElementById('formUsuario').addEventListener('submit', function (e) {
-                e.preventDefault();
+        // Función para cargar licitadores
+        function cargarLicitadores() {
+            const licitadorRef = ref(database, 'licitadores');
+            const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
+            tablaLicitadores.innerHTML = '';
 
-                const user = {
-                    username: document.getElementById('username').value,
-                    password: document.getElementById('password').value,
-                };
-
-                guardarUsuario(user)
-                    .then(() => {
-                        document.getElementById('message').innerHTML = "<p>Usuario registrado con éxito.</p>";
-                        document.getElementById('formUsuario').reset();  // Limpiar el formulario
-                    })
-                    .catch((error) => {
-                        document.getElementById('message').innerHTML = "<p>Error al registrar el usuario: " + error.message + "</p>";
-                    });
+            onValue(licitadorRef, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const licitador = childSnapshot.val();
+                    const row = `<tr>
+                        <td>${childSnapshot.key}</td>
+                        <td>${licitador.nombre}</td>
+                    </tr>`;
+                    tablaLicitadores.innerHTML += row;
+                });
             });
-        </script>
-    </div>
+        }
+
+        // Manejo del formulario de licitadores
+        document.getElementById('formLicitador').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const licitador = {
+                nombre: document.getElementById('nombreLicitador').value,
+            };
+
+            guardarLicitador(licitador)
+                .then(() => {
+                    document.getElementById('messageLicitadores').innerHTML = "<p>Licitador registrado con éxito.</p>";
+                    document.getElementById('formLicitador').reset();
+                    cargarLicitadores();
+                })
+                .catch((error) => {
+                    document.getElementById('messageLicitadores').innerHTML = "<p>Error al registrar el licitador: " + error.message + "</p>";
+                });
+        });
+
+        // Cargar datos al iniciar
+        cargarUsuarios();
+        cargarLicitadores();
+    </script>
 </body>
 </html>
