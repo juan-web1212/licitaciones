@@ -20,7 +20,7 @@
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones1</h1>
         </div>
 
         <!-- Imagen -->
@@ -33,60 +33,5 @@
             <p>Desarrollado por Juan Sanchez</p>
         </div>
     </div>
-
-    <!-- Firebase SDK Modular -->
-    <script type="module">
-        // Importar Firebase SDK modular
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
-            authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
-            databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
-            projectId: "tenderlicitaciones-9ba50",
-            storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
-            messagingSenderId: "531013447459",
-            appId: "1:531013447459:web:07580f26176abe2fe62696",
-            measurementId: "G-E9RJCXF5MC"
-        };
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // Función para cambiar las imágenes automáticamente
-        let imagenIndex = 1;
-        function cambiarImagen() {
-            imagenIndex = (imagenIndex % 3) + 1;
-            const imagen = document.getElementById('imagenPrincipal');
-            imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
-        }
-        setInterval(cambiarImagen, 5000);
-
-        // Función para redirigir y guardar rol en Firebase
-        window.redirigirPagina = function() {
-            const rol = document.getElementById("role").value.trim().toLowerCase();
-
-            if (rol === "admin" || rol === "user" || rol === "licitador") {
-                // Guardar en Firebase
-                const usuariosRef = ref(database, 'usuarios/');
-                push(usuariosRef, { rol: rol, timestamp: Date.now() })
-                    .then(() => {
-                        alert(`¡Bienvenido, ${rol}!`);
-                        if (rol === "admin") window.location.href = "inicio/admin.html";
-                        else if (rol === "user") window.location.href = "inicio/user.html";
-                        else if (rol === "licitador") window.location.href = "inicio/licitador.html";
-                    })
-                    .catch((error) => {
-                        console.error("Error al conectar con Firebase:", error);
-                        alert("No se pudo conectar con Firebase.");
-                    });
-            } else {
-                alert("Por favor, ingresa un rol válido: admin, user, o licitador.");
-            }
-        };
-    </script>
 </body>
 </html>
