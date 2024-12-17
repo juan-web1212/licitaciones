@@ -39,6 +39,13 @@ function filtrarColumna(tablaID, indiceColumna) {
         }
     }
 }
+// Función para confirmar al salir
+function confirmarSalir() {
+    const confirmation = confirm("¿Estás seguro de que quieres salir?");
+    if (confirmation) {
+        window.location.href = "../index.html"; // Redirige al inicio
+    }
+}
 
 // Pop-up para salir
 document.getElementById('salirBtn').addEventListener('click', function () {
