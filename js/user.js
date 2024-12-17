@@ -10,7 +10,7 @@ const firebaseConfig = {
             storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
             messagingSenderId: "531013447459",
             appId: "1:531013447459:web:07580f26176abe2fe62696",
-            measurementId: "G-E9RJCXF5MC""
+            measurementId: "G-E9RJCXF5MC"
 };
 
 // Inicializar Firebase
