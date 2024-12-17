@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licitador - Enviar Licitación</title>
+    <title>Licitador - Página de Licitaciones</title>
     <link rel="stylesheet" href="../css/licitador-styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Licitador - Completar Licitación</h1>
-
-        <!-- Tabla para agregar los datos de la licitación -->
-        <table id="licitacionTable">
+        <h1>Agregar Producto para Licitación</h1>
+        <table id="tablaLicitaciones">
             <thead>
                 <tr>
-                    <th>Nombre del Producto</th>
+                    <th>Nombre de Producto</th>
                     <th>Precio</th>
                     <th>ID de Licitador</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="text" id="producto" placeholder="Nombre del Producto"></td>
-                    <td><input type="number" id="precio" placeholder="Precio" min="0"></td>
-                    <td><input type="number" id="idLicitador" placeholder="ID de Licitador" min="1"></td>
-                </tr>
+                <!-- Filas de productos dinámicas se agregarán aquí -->
             </tbody>
         </table>
 
-        <!-- Botón Aceptar visible al tener algún dato en la tabla -->
-        <button id="aceptarBtn" onclick="enviarLicitacion()">Aceptar</button>
+        <button id="agregarProductoBtn">+</button>
+        <button id="aceptarBtn">Aceptar</button>
+        <button id="salirBtn" onclick="window.location.href='../index.html';">Salir</button>
+    </div>
 
-        <!-- Botón Salir -->
-        <button id="salirBtn" onclick="mostrarConfirmacion()">Salir</button>
+    <div id="popupCentroCosto" style="display:none;">
+        <!-- Aquí se manejaría el popup para el centro de costo, si lo necesitas -->
     </div>
 
     <script src="../js/licitador.js"></script>
