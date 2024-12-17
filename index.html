@@ -5,37 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TENDERS</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-        // Función para cambiar las imágenes automáticamente
-        let imagenIndex = 1;
-        function cambiarImagen() {
-            imagenIndex = (imagenIndex % 3) + 1;  // Cambia entre 1, 2 y 3
-            const imagen = document.getElementById('imagenPrincipal');
-            imagen.src = `imagenes/imagen${imagenIndex}.jpg`;  // Cambia la fuente de la imagen
-        }
-
-        // Iniciar cambio automático de imágenes
-        setInterval(cambiarImagen, 5000);  // Cambia cada 5 segundos
-
-        // Función para redirigir según el tipo de usuario
-        function redirigirPagina() {
-            const rol = document.getElementById("role").value.trim().toLowerCase();
-            
-            if (rol === "admin") {
-                window.location.href = "inicio/admin.html";  // Redirige a la página del administrador
-            } else if (rol === "user") {
-                window.location.href = "inicio/user.html";  // Redirige a la página del usuario
-            } else if (rol === "licitador") {
-                window.location.href = "inicio/licitador.html";  // Redirige a la página del licitador
-            } else {
-                alert("Por favor, ingresa un rol válido: admin, user, o licitador.");
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <!-- Menú desplegable de Inicio (moved to top-right) -->
         <div class="menu">
             <button onclick="document.getElementById('roleMenu').classList.toggle('show')">Inicio</button>
             <div id="roleMenu" class="dropdown-content">
@@ -45,120 +17,121 @@
             </div>
         </div>
 
-        <!-- Título y párrafo centrado sobre la imagen -->
         <div class="text-content">
             <h1>Bienvenido al sistema de Tenders licitaciones</h1>
         </div>
 
-        <!-- Imagen que cambia -->
         <div class="image-container">
             <img id="imagenPrincipal" src="imagenes/imagen1.jpg" alt="Imagen Principal" />
         </div>
 
-        <!-- Footer sobre la imagen -->
         <div class="footer">
             <p>Echo por Juan Sanchez</p>
         </div>
     </div>
 
+    <!-- Agregar Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+
+    <!-- Script principal -->
+    <script>
+      // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
+  authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
+  projectId: "tenderlicitaciones-9ba50",
+  storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
+  messagingSenderId: "531013447459",
+  appId: "1:531013447459:web:07580f26176abe2fe62696",
+  measurementId: "G-E9RJCXF5MC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+        // Función para cambiar la imagen automáticamente
+        let imagenIndex = 1;
+        function cambiarImagen() {
+            imagenIndex = (imagenIndex % 3) + 1;
+            document.getElementById('imagenPrincipal').src = `imagenes/imagen${imagenIndex}.jpg`;
+        }
+        setInterval(cambiarImagen, 5000);
+
+        // Función para redirigir y guardar el rol en Firebase
+        function redirigirPagina() {
+            const rol = document.getElementById("role").value.trim().toLowerCase();
+
+            if (rol === "admin" || rol === "user" || rol === "licitador") {
+                const nuevoUsuario = {
+                    rol: rol,
+                    timestamp: Date.now()
+                };
+
+                // Guardar en Firebase
+                database.ref('usuarios/').push(nuevoUsuario)
+                    .then(() => {
+                        alert(`¡Bienvenido, ${rol}!`);
+                        if (rol === "admin") window.location.href = "inicio/admin.html";
+                        else if (rol === "user") window.location.href = "inicio/user.html";
+                        else if (rol === "licitador") window.location.href = "inicio/licitador.html";
+                    })
+                    .catch((error) => {
+                        console.error("Error al conectar con Firebase:", error);
+                        alert("No se pudo conectar con Firebase.");
+                    });
+            } else {
+                alert("Por favor, ingresa un rol válido: admin, user, o licitador.");
+            }
+        }
+    </script>
+
     <style>
-        /* Estilos para el menú desplegable de inicio */
+        /* Estilos para el menú y la imagen */
         .menu {
             position: absolute;
             top: 20px;
-            right: 20px;  /* Mueve el botón a la parte superior derecha */
-            z-index: 10;
+            right: 20px;
         }
-
         .menu button {
             background-color: #4CAF50;
             color: white;
             padding: 10px;
-            font-size: 16px;
             border: none;
             cursor: pointer;
         }
-
-        .menu button:hover {
-            background-color: #45a049;
-        }
-
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
             padding: 10px;
-            margin-top: 10px;  /* Evita que se quede pegado al botón */
-            right: 0;  /* Alinea el menú a la derecha del botón */
+            right: 0;
         }
-
         .dropdown-content.show {
             display: block;
         }
-
-        /* Estilos para la imagen */
-        .image-container {
-            position: relative;
+        .image-container img {
             width: 100%;
-            height: 100vh;  /* Ocupa toda la altura de la pantalla */
-            overflow: hidden;
+            height: 100vh;
+            object-fit: cover;
         }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;  /* Hace que la imagen ocupe todo el espacio sin distorsionarse */
-        }
-
-        /* Estilos para el texto centrado sobre la imagen */
-        .text-content {
-            text-align: center;
-            position: absolute;
-            top: 5%;  /* Centrado a 5% desde la parte superior */
-            left: 50%;  /* Centra el texto horizontalmente */
-            transform: translateX(-50%);  /* Asegura que esté perfectamente centrado */
-            color: white;
-            z-index: 10;
-        }
-
-        .text-content h1 {
-            font-size: 26px;  /* Ajusta el tamaño del texto */
-            color: white;  /* Texto blanco */
-            text-shadow: 
-                1px 1px 0 green, 
-                -1px 1px 0 green, 
-                1px -1px 0 green, 
-                -1px -1px 0 green;  /* Borde verde simulado */
-        }
-
-        /* Estilos para el footer */
         .footer {
             position: absolute;
             bottom: 0;
             width: 100%;
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
-            font-size: 16px;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor visibilidad */
             padding: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Para evitar desbordamiento de la página */
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;  /* Evita el desplazamiento horizontal */
         }
     </style>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
-
-    <!-- Tu archivo JavaScript principal -->
-    <script src="app.js"></script>
 </body>
 </html>
