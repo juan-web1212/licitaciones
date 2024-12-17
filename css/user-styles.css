@@ -158,3 +158,51 @@ button#aceptarBtn {
 button#aceptarBtn:hover {
     background-color: #45a049;
 }
+
+/* Estilo de los elementos dentro del popup */
+#popupCentroCosto h3 {
+    color: #4CAF50;
+}
+
+#popupCentroCosto input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#popupCentroCosto button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#popupCentroCosto button:hover {
+    transition: 0.3s;
+}
+
+/* Específico para los botones */
+#popupCentroCosto button:nth-child(1) { /* Completar compra */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#popupCentroCosto button:nth-child(2) { /* Cancelar */
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+#popupCentroCosto button:nth-child(1):hover {
+    background-color: #45a049;
+}
+
+#popupCentroCosto button:nth-child(2):hover {
+    background-color: #e53935;
+}
