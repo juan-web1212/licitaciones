@@ -38,6 +38,17 @@ function confirmarSalir() {
     }
 }
 
+// Función para verificar si se seleccionaron licitadores
+function checkLicitadores() {
+    const checkboxes = document.querySelectorAll('.acceptCheckbox:checked');
+    const acceptButton = document.getElementById('aceptarBtn');
+    if (checkboxes.length > 0) {
+        acceptButton.style.display = 'inline-block';
+    } else {
+        acceptButton.style.display = 'none';
+    }
+}
+
 // Función para mostrar el pop-up del centro de costo
 function mostrarCentroCostoPopup() {
     const checkboxes = document.querySelectorAll('.acceptCheckbox:checked');
