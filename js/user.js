@@ -68,15 +68,7 @@ function calcularFechaVencimiento(dias) {
     const fecha = new Date();
     fecha.setDate(fecha.getDate() + dias);
     return fecha.toISOString().split('T')[0];
-}
 
-// Filtrar Licitadores
-function filtrarLicitadores() {
-    const filtro = document.getElementById('licitadoresFilter').value.toLowerCase();
-    const rows = document.querySelectorAll('#licitadoresTable tbody tr');
-    rows.forEach(row => {
-        row.style.display = row.innerText.toLowerCase().includes(filtro) ? '' : 'none';
-    });
 }
 
 // Filtrar Productos
