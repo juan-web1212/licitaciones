@@ -33,5 +33,14 @@
             <p>Desarrollado por Juan Sanchez</p>
         </div>
     </div>
+<script type="module">
+ // Función para cambiar las imágenes automáticamente
+        let imagenIndex = 1;
+        function cambiarImagen() {
+            imagenIndex = (imagenIndex % 3) + 1;
+            const imagen = document.getElementById('imagenPrincipal');
+            imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
+        };
+</script>
 </body>
 </html>
