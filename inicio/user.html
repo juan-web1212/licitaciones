@@ -75,16 +75,15 @@
         <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
         <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
-
-    <!-- Pop-up para ingresar número de centro de costo -->
-    <div id="popupCentroCosto" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="cerrarPopup()">&times;</span>
-            <h3>Ingrese el número de Centro de Costo</h3>
-            <input type="text" id="centroCostoInput" placeholder="Centro de Costo">
-            <button onclick="finalizarCompra()">Completar Compra</button>
-            <button onclick="cerrarPopup()" class="cancelarBtn">Cancelar</button>
-        </div>
+<!-- Pop-up para ingresar número de centro de costo -->
+<div id="popupCentroCosto" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="cerrarPopup()">&times;</span>
+        <h3 style="color: #4CAF50;">Ingrese el número de Centro de Costo</h3>
+        <input type="text" id="centroCostoInput" placeholder="Centro de Costo">
+        <button onclick="finalizarCompra()">Completar Compra</button>
+        <button onclick="cerrarPopup()" class="cancelarBtn">Cancelar</button>
     </div>
+</div>
 </body>
 </html>
