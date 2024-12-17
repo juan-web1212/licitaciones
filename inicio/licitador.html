@@ -3,23 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licitador - Página de Licitaciones</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Licitador - Enviar Licitación</title>
+    <link rel="stylesheet" href="../css/licitador-styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenido Licitador</h1>
-        <p>Aquí puedes presentar nuevas licitaciones.</p>
-        <form method="POST" action="/submit-licitacion">
-            <label for="titulo">Título de la Licitación:</label>
-            <input type="text" name="titulo" id="titulo" required>
+        <h1>Licitador - Completar Licitación</h1>
 
-            <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" id="descripcion" required></textarea>
+        <!-- Tabla para agregar los datos de la licitación -->
+        <table id="licitacionTable">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Precio</th>
+                    <th>ID de Licitador</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" id="producto" placeholder="Nombre del Producto"></td>
+                    <td><input type="number" id="precio" placeholder="Precio" min="0"></td>
+                    <td><input type="number" id="idLicitador" placeholder="ID de Licitador" min="1"></td>
+                </tr>
+            </tbody>
+        </table>
 
-            <button type="submit">Presentar Licitación</button>
-        </form>
-        <a href="../index.html">Volver al inicio</a>
+        <!-- Botón Aceptar visible al tener algún dato en la tabla -->
+        <button id="aceptarBtn" onclick="enviarLicitacion()">Aceptar</button>
+
+        <!-- Botón Salir -->
+        <button id="salirBtn" onclick="mostrarConfirmacion()">Salir</button>
     </div>
+
+    <script src="../js/licitador.js"></script>
 </body>
 </html>
