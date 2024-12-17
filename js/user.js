@@ -15,7 +15,20 @@ function seleccionarCheckbox(event) {
 // Añadir evento para manejar los checkboxes
 const checkboxes = document.querySelectorAll('.licitacion-checkbox');
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', seleccionarCheckbox);
+    checkbox.addEventListener('change', function(event) {
+        // Llamamos a la función para seleccionar un solo checkbox
+        seleccionarCheckbox(event);
+
+        // Verificamos si más de un checkbox está seleccionado
+        const selectedCheckboxes = document.querySelectorAll('.licitacion-checkbox:checked');
+        if (selectedCheckboxes.length > 1) {
+            alert("Solo puedes seleccionar una licitación a la vez.");
+            // Si se seleccionan más de uno, desmarcar todos los checkboxes
+            selectedCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+    });
 });
 
 // Función para completar la compra
@@ -33,50 +46,6 @@ function finalizarCompra() {
 }
 
 // Función para mostrar el popup
-function mostrarPopup() {
-    document.getElementById('popupCentroCosto').style.display = 'flex';
-}
-
-// Función para cerrar el popup
-function cerrarPopup() {
-    document.getElementById('popupCentroCosto').style.display = 'none';
-}
-
-// Función para manejar la acción de "Aceptar"
-function aceptarCompra() {
-    const centroCosto = document.getElementById('centroCosto').value;
-    
-    if (centroCosto) {
-        // Completar compra con el número de centro de costo
-        const licitacionId = document.querySelector('.licitacion-checkbox:checked').dataset.licitacionId;
-        alert(`Compra completada con la licitación N° ${licitacionId} y centro de costo: ${centroCosto}`);
-        window.location.href = "../index.html"; // Redirige a la página de inicio
-    } else {
-        alert("Por favor, ingresa un número de Centro de Costo.");
-    }
-}
-
-// Función para cancelar la acción
-function cancelarCompra() {
-    cerrarPopup();
-    alert("Acción cancelada");
-}
-
-// Función para manejar la selección de un solo checkbox
-function seleccionarCheckboxUnico(event) {
-    // Obtener todos los checkboxes
-    const checkboxes = document.querySelectorAll('.licitacion-checkbox');
-    
-    // Desmarcar todos los checkboxes
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    });
-
-    // Marcar el checkbox seleccionado
-    event.target.checked = true;
-}
-
-// Función para mostrar el popup de la compra
 function mostrarPopup() {
     document.getElementById('popupCentroCosto').style.display = 'flex';
 }
