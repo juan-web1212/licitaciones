@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Tenders</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
-    <script type="module" src="../js/admin-script.js" defer></script>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+  import { getDatabase } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
+
+  // Configuración de Firebase
+  const firebaseConfig = {
+            apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
+            authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
+            databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
+            projectId: "tenderlicitaciones-9ba50",
+            storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
+            messagingSenderId: "531013447459",
+            appId: "1:531013447459:web:07580f26176abe2fe62696",
+            measurementId: "G-E9RJCXF5MC"
+  };
+
+  // Inicializa Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+</script>
+
+<!-- Luego tu archivo JavaScript -->
+<script type="module" src="../js/admin-script.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración3</h1>
+        <h1>Panel de Administración4</h1>
 
         <!-- Formulario para dar de alta usuarios -->
         <div class="form-container">
