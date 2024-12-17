@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios - Licitaciones</title>
     <link rel="stylesheet" href="../css/user-styles.css">
+    <script src="../js/user.js"></script>
 </head>
 <body>
     <div class="container">
@@ -12,11 +13,12 @@
         
         <!-- Tabla de Licitadores -->
         <h2>Licitadores</h2>
-        <table>
+        <input type="text" id="licitadoresFilter" placeholder="Buscar Licitador" onkeyup="filtrarLicitadores()">
+        <table id="licitadoresTable">
             <thead>
                 <tr>
                     <th>Nombre del Licitador</th>
-                    <th>Licitaciones Vistas</th>
+                    <th>Licitaciones Presentadas</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,13 +36,15 @@
 
         <!-- Tabla de Productos -->
         <h2>Productos</h2>
-        <table>
+        <input type="text" id="productosFilter" placeholder="Buscar Producto" onkeyup="filtrarProductos()">
+        <table id="productosTable">
             <thead>
                 <tr>
                     <th>Nombre del Producto</th>
                     <th>Precio</th>
                     <th>ID de Licitación</th>
                     <th>Fecha de Vencimiento</th>
+                    <th>Nombre del Licitador</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,17 +53,20 @@
                     <td>$100</td>
                     <td>123</td>
                     <td>2024-12-20</td>
+                    <td>Licitador 1</td>
                 </tr>
                 <tr>
                     <td>Producto B</td>
                     <td>$150</td>
                     <td>124</td>
                     <td>2024-12-25</td>
+                    <td>Licitador 2</td>
                 </tr>
                 <!-- Más filas de productos aquí -->
             </tbody>
         </table>
 
+        <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
     </div>
 </body>
 </html>
