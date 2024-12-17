@@ -124,14 +124,6 @@ function filtrarLicitadores() {
         }
     }
 }
-// Función para confirmar al salir
-function confirmarSalir() {
-    const confirmation = confirm("¿Estás seguro de que quieres salir?");
-    if (confirmation) {
-        window.location.href = "../index.html"; // Redirige al inicio
-    }
-}
-
 // Función para verificar si se seleccionaron licitadores
 function checkLicitadores() {
     const checkboxes = document.querySelectorAll('.acceptCheckbox:checked');
