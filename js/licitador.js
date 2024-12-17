@@ -15,7 +15,7 @@ document.getElementById('agregarProductoBtn').addEventListener('click', function
     celdaId.innerHTML = 'licitador1';  // Establecer ID como "licitador1" por defecto
 
     // Mostrar el botón de "Aceptar" solo si se han agregado filas
-    document.getElementById("aceptarBtn").style.display = 'block';
+    document.getElementById("aceptarBtn").style.display = 'inline-block';
 });
 
 // Función para manejar el evento de "Aceptar" y validar la tabla
