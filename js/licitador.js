@@ -11,7 +11,7 @@ document.getElementById('agregarProductoBtn').addEventListener('click', function
 
     // Añadir campos de entrada a cada celda
     celdaProducto.innerHTML = '<input type="text" placeholder="Nombre del producto" required>';
-    celdaPrecio.innerHTML = '<input type="number" placeholder="Precio" required>';
+    celdaPrecio.innerHTML = '<input type="number" placeholder="Precio" min="0" required>';
     celdaId.innerHTML = 'licitador1';  // Establecer ID como "licitador1" por defecto
 });
 
@@ -20,13 +20,13 @@ document.getElementById('aceptarBtn').addEventListener('click', function() {
     const filas = document.getElementById('tablaLicitaciones').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     let datosCompletos = true;
 
-    // Comprobar si hay campos vacíos
+    // Comprobar si hay campos vacíos o precios menores a 0
     for (let i = 0; i < filas.length; i++) {
         const celdas = filas[i].getElementsByTagName('td');
         const producto = celdas[0].getElementsByTagName('input')[0].value;
         const precio = celdas[1].getElementsByTagName('input')[0].value;
 
-        if (!producto || !precio) {
+        if (!producto || precio < 0) {
             datosCompletos = false;
             break;
         }
@@ -35,7 +35,8 @@ document.getElementById('aceptarBtn').addEventListener('click', function() {
     if (datosCompletos) {
         alert("¡Licitación enviada con éxito!");
         // Aquí puedes añadir lógica para guardar la licitación en la base de datos
+        window.close(); // Cierra la página tras la validación exitosa
     } else {
-        alert("Por favor, completa al menos un producto antes de enviar.");
+        alert("Por favor, completa al menos un producto con un precio válido (mayor o igual a 0).");
     }
 });
