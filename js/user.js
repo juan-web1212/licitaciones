@@ -74,3 +74,10 @@ function cancelarCompra() {
     cerrarPopup();
     alert("Acción cancelada");
 }
+// Función para mostrar el popup de confirmación al hacer clic en "Salir"
+function mostrarConfirmacion() {
+    const confirmacion = confirm("¿Estás seguro de que quieres salir?");
+    if (confirmacion) {
+        window.location.href = "../index.html"; // Redirige al inicio
+    }
+}
