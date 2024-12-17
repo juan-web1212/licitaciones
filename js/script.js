@@ -27,13 +27,13 @@ function redirigirPagina() {
     // Define las rutas para cada rol
     switch (role) {
         case 'admin':
-            url = 'admin.html'; // Página para administradores
+            url = 'inicio/admin.html'; // Página para administradores
             break;
         case 'user':
-            url = 'user.html'; // Página para usuarios
+            url = 'inicio/user.html'; // Página para usuarios
             break;
         case 'licitador':
-            url = 'licitador.html'; // Página para licitadores
+            url = 'inicio/licitador.html'; // Página para licitadores
             break;
         default:
             alert('Por favor, escribe un rol válido: admin, user o licitador');
