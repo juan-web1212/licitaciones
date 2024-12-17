@@ -9,12 +9,13 @@
 <body>
     <div class="container">
         <h1>Agregar Producto para Licitación</h1>
+
         <table id="tablaLicitaciones">
             <thead>
                 <tr>
                     <th>Nombre de Producto</th>
                     <th>Precio</th>
-                    <th>ID de Licitador</th>
+                    <th>Nombre del Licitador</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,15 +23,12 @@
             </tbody>
         </table>
 
-        <button id="agregarProductoBtn">+</button>
-        <button id="aceptarBtn">Aceptar</button>
-        <button id="salirBtn" ;">Salir</button>
+        <!-- Botones de Acción -->
+        <button id="agregarProductoBtn" onclick="agregarFila()">+</button>
+        <button id="guardarProductosBtn" onclick="guardarProductos()">Aceptar</button>
+        <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
     </div>
 
-    <div id="popupCentroCosto" style="display:none;">
-        <!-- Aquí se manejaría el popup para el centro de costo, si lo necesitas -->
-    </div>
-
-    <script src="../js/licitador.js"></script>
+    <script type="module" src="../js/licitador.js"></script>
 </body>
 </html>
