@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
     authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
@@ -25,16 +24,10 @@ function cambiarImagen() {
 }
 setInterval(cambiarImagen, 4500);
 
-// Mostrar formulario de inicio de sesión de usuario
-function mostrarFormularioUsuario() {
-    document.getElementById("formUsuarioSesion").style.display = "block";
-    document.getElementById("formLicitadorSesion").style.display = "none";
-}
-
-// Mostrar formulario de inicio de sesión de licitador
-function mostrarFormularioLicitador() {
-    document.getElementById("formLicitadorSesion").style.display = "block";
-    document.getElementById("formUsuarioSesion").style.display = "none";
+// Mostrar formularios
+function mostrarFormulario() {
+    const formContainer = document.getElementById("formContainer");
+    formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
 }
 
 // Validar usuario en la base de datos
@@ -83,11 +76,25 @@ function redirigirLicitador() {
         return;
     }
 
+    console.log("Licitador ingresado:", nombreLicitador);
     window.location.href = "inicio/licitador.html";
+}
+
+// Función para alternar los checkboxes
+function toggleTipo(tipo) {
+    const licitadorCheck = document.getElementById("licitadorCheck");
+    const usuarioCheck = document.getElementById("usuarioCheck");
+
+    if (tipo === 'licitador') {
+        usuarioCheck.checked = false; // Desmarcar el otro checkbox
+    } else {
+        licitadorCheck.checked = false; // Desmarcar el otro checkbox
+    }
 }
 
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("inicioBtn").addEventListener("mouseover", mostrarFormulario);
     document.getElementById("validarBtn").addEventListener("click", validarUsuario);
     document.getElementById("entrarLicitadorBtn").addEventListener("click", redirigirLicitador);
 });
