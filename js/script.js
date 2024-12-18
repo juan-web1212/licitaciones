@@ -75,20 +75,24 @@ async function validarUsuario() {
 
 // Validar licitador
 async function validarLicitador() {
-    const idLicitador = document.getElementById("idLicitador").value.trim();
+    const nombreLicitador = document.getElementById("nombreLicitador");
 
-    if (!idLicitador) {
-        alert("Por favor, complete el campo de ID del licitador.");
+    if (!nombreLicitador) {
+        console.error("Campo 'nombreLicitador' no encontrado.");
+        alert("Error al acceder al campo del licitador.");
+        return;
+    }
+
+    const nombreLicitadorValue = nombreLicitador.value.trim();
+
+    if (!nombreLicitadorValue) {
+        alert("Por favor, complete el campo de nombre.");
         return;
     }
 
     try {
-        // Buscar por ID en la base de datos
-        const snapshot = await get(ref(database, `licitadores/${idLicitador}`));
+        const snapshot = await get(ref(database, `licitadores/${nombreLicitadorValue}`));
         if (snapshot.exists()) {
-            // Almacenar el ID en sessionStorage
-            sessionStorage.setItem("idLicitador", idLicitador);
-            // Redirigir a la página de licitador
             window.location.href = "inicio/licitador.html";
         } else {
             alert("Licitador no encontrado.");
