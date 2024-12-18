@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración1</h1>
+        <h1>Panel de Administración</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -16,6 +16,11 @@
             <input type="text" id="username" placeholder="Nombre de usuario" required>
             <input type="password" id="password" placeholder="Contraseña" required>
             <input type="email" id="email" placeholder="Correo Electrónico" required>
+            <select id="tipo" required>
+                <option value="" disabled selected>Seleccione el tipo</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
             <button type="submit">Registrar Usuario</button>
         </form>
 
@@ -29,31 +34,7 @@
                 <tr>
                     <th>Nombre de Usuario</th>
                     <th>Correo Electrónico</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos serán llenados dinámicamente -->
-            </tbody>
-        </table>
-
-        <!-- Formulario para registrar licitadores -->
-        <h2>Registrar Nuevo Licitador</h2>
-        <form id="formLicitador">
-            <input type="text" id="nombreLicitador" placeholder="Nombre del Licitador" required>
-            <button type="submit">Registrar Licitador</button>
-        </form>
-
-        <!-- Mensajes de estado -->
-        <div id="messageLicitadores"></div>
-
-        <!-- Tabla de Licitadores -->
-        <h2>Tabla de Licitadores</h2>
-        <table id="tablaLicitadores">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -109,6 +90,7 @@
                     const row = `<tr>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="username">${user.username}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
+                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="tipo">${user.tipo}</td>
                         <td>
                             <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
                         </td>
@@ -149,49 +131,6 @@
             }
         });
 
-        // -------------------- LICITADORES --------------------
-
-        // Guardar nuevo licitador
-        function guardarLicitador(licitador) {
-            const licitadorRef = ref(database, `licitadores/${licitador.nombre}`);
-            return set(licitadorRef, licitador);
-        }
-
-        // Cargar licitadores
-        function cargarLicitadores() {
-            const licitadorRef = ref(database, 'licitadores');
-            const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
-            tablaLicitadores.innerHTML = '';
-
-            onValue(licitadorRef, (snapshot) => {
-                tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
-                snapshot.forEach((childSnapshot) => {
-                    const licitador = childSnapshot.val();
-                    const row = `<tr>
-                        <td>${childSnapshot.key}</td>
-                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
-                        <td>
-                            <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
-                        </td>
-                    </tr>`;
-                    tablaLicitadores.innerHTML += row;
-                });
-            });
-        }
-
-        // Eliminar licitador
-        function eliminarLicitador(nombre) {
-            const licitadorRef = ref(database, `licitadores/${nombre}`);
-            remove(licitadorRef)
-                .then(() => {
-                    alert('Licitador eliminado con éxito.');
-                    cargarLicitadores();
-                })
-                .catch((error) => {
-                    alert('Error al eliminar licitador: ' + error.message);
-                });
-        }
-
         // Manejo del formulario de usuarios
         document.getElementById('formUsuario').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -200,6 +139,7 @@
                 username: document.getElementById('username').value,
                 password: document.getElementById('password').value,
                 email: document.getElementById('email').value,
+                tipo: document.getElementById('tipo').value,
             };
 
             guardarUsuario(user)
@@ -213,28 +153,8 @@
                 });
         });
 
-        // Manejo del formulario de licitadores
-        document.getElementById('formLicitador').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const licitador = {
-                nombre: document.getElementById('nombreLicitador').value,
-            };
-
-            guardarLicitador(licitador)
-                .then(() => {
-                    document.getElementById('messageLicitadores').innerHTML = "<p>Licitador registrado con éxito.</p>";
-                    document.getElementById('formLicitador').reset();
-                    cargarLicitadores();
-                })
-                .catch((error) => {
-                    document.getElementById('messageLicitadores').innerHTML = "<p>Error al registrar el licitador: " + error.message + "</p>";
-                });
-        });
-
         // Cargar datos al iniciar
         cargarUsuarios();
-        cargarLicitadores();
     </script>
 </body>
 </html>
