@@ -29,7 +29,6 @@ function cargarLicitadores() {
             const row = `
                 <tr>
                     <td>${data.nombre}</td>
-                    <td>${data.licitacionesPresentadas}</td>
                     <td>${child.key}</td>
                     <td><input type="checkbox" onchange="checkLicitadores()"></td>
                 </tr>
@@ -53,7 +52,6 @@ function cargarProductos() {
                 <tr>
                     <td>${data.nombreProducto}</td>
                     <td>${data.precio}</td>
-                    <td>${child.key}</td>
                     <td>${fechaVencimiento}</td>
                     <td>${data.nombreLicitador}</td>
                 </tr>
