@@ -33,20 +33,20 @@ function mostrarFormulario() {
 // Validar usuario en la base de datos
 async function validarUsuario() {
     const username = document.getElementById("usuario").value;
-    const contraseña = document.getElementById("contraseña").value;
+    const password = document.getElementById("contraseña").value;  // Cambié 'contraseña' por 'password'
 
-    if (!username || !contraseña) {
+    if (!username || !password) {
         alert("Por favor, complete todos los campos.");
         return;
     }
 
     try {
-        const snapshot = await get(ref(database, `usuarios/${usuario}`));
+        const snapshot = await get(ref(database, `usuarios/${username}`));  // Corregí 'usuario' por 'username'
 
         if (snapshot.exists()) {
             const data = snapshot.val();
 
-            if (data.password === password) {
+            if (data.password === password) {  // Aquí se valida contra 'password'
                 if (data.tipo === 1) {
                     window.location.href = "inicio/admin.html";
                 } else if (data.tipo === 2) {
