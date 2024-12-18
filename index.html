@@ -9,31 +9,27 @@
 </head>
 <body>
     <div class="container">
-        <!-- Menú desplegable de Inicio -->
+        <!-- Menú con botones Inicio Licitadores y Inicio Usuarios -->
         <div class="menu">
-            <button id="inicioBtn">Inicio</button>
-            <div id="formContainer" class="form-container" style="display: none;">
-                <div id="formUsuario">
-                    <h3>Inicio de Sesión</h3>
-                    
-                    <!-- Botones para seleccionar tipo de inicio -->
-                    <div>
-                        <button id="usuarioBtn" onclick="mostrarFormularioUsuario()">Inicio Usuarios</button>
-                        <button id="licitadorBtn" onclick="mostrarFormularioLicitador()">Inicio Licitadores</button>
-                    </div>
+            <button id="inicioLicitadorBtn" onclick="mostrarFormularioLicitador()">Inicio Licitadores</button>
+            <button id="inicioUsuarioBtn" onclick="mostrarFormularioUsuario()">Inicio Usuarios</button>
+        </div>
 
-                    <!-- Formulario para Usuarios -->
-                    <div id="formUsuarioSesion" style="display: none;">
-                        <input type="text" id="usuario" placeholder="Usuario" required>
-                        <input type="password" id="contraseña" placeholder="Contraseña" required>
-                        <button id="validarBtn">Entrar como Usuario</button>
-                    </div>
+        <div id="formContainer" class="form-container" style="display: none;">
+            <div id="formUsuario">
+                <h3>Inicio de Sesión</h3>
+                
+                <!-- Formulario para Usuarios -->
+                <div id="formUsuarioSesion" style="display: none;">
+                    <input type="text" id="usuario" placeholder="Usuario" required>
+                    <input type="password" id="contraseña" placeholder="Contraseña" required>
+                    <button id="validarBtn">Entrar como Usuario</button>
+                </div>
 
-                    <!-- Formulario para Licitadores -->
-                    <div id="formLicitadorSesion" style="display: none;">
-                        <input type="text" id="nombreLicitador" placeholder="Nombre Licitador" required>
-                        <button id="entrarLicitadorBtn">Entrar como Licitador</button>
-                    </div>
+                <!-- Formulario para Licitadores -->
+                <div id="formLicitadorSesion" style="display: none;">
+                    <input type="text" id="nombreLicitador" placeholder="Nombre Licitador" required>
+                    <button id="entrarLicitadorBtn">Entrar como Licitador</button>
                 </div>
             </div>
         </div>
