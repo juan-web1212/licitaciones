@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Mostrar los formularios
+// Funciones para mostrar formularios
 function mostrarFormularioUsuario() {
     document.getElementById("formContainerUsuario").style.display = "block";
     document.getElementById("formContainerLicitador").style.display = "none";
@@ -27,14 +27,13 @@ function mostrarFormularioLicitador() {
     document.getElementById("formContainerUsuario").style.display = "none";
 }
 
-// Validar usuarios
+// Validar usuario
 async function validarUsuario() {
     const username = document.getElementById("usuario").value;
     const password = document.getElementById("contraseña").value;
 
     try {
         const snapshot = await get(ref(database, `usuarios/${username}`));
-
         if (snapshot.exists() && snapshot.val().password === password) {
             alert("Usuario válido");
         } else {
@@ -45,18 +44,15 @@ async function validarUsuario() {
     }
 }
 
-// Validar licitadores
+// Validar licitador
 async function validarLicitador() {
-    const nombre = document.getElementById("nombreLicitador").value;
-    const clave = document.getElementById("claveLicitador").value;
-
+    const nombre = document.getElementById("nombreLicitador")?.value || "";
     try {
         const snapshot = await get(ref(database, `licitadores/${nombre}`));
-
-        if (snapshot.exists() && snapshot.val().clave === clave) {
+        if (snapshot.exists()) {
             alert("Licitador válido");
         } else {
-            alert("Licitador o clave incorrectos");
+            alert("Nombre de licitador incorrecto");
         }
     } catch (error) {
         alert("Error validando licitador");
