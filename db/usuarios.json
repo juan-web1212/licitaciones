@@ -1,9 +1,0 @@
-// usuarios.json
-[
-    {
-        "id": 1,
-        "nombre": "Juan Pérez",
-        "email": "juan@correo.com",
-        "password": "contraseña123"
-    }
-]
