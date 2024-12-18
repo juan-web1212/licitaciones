@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración10</h1>
+        <h1>Panel de Administración</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -126,18 +126,18 @@
             });
         }
 
-        // Eliminar usuario
-        function eliminarUsuario(user) {
-            const userRef = ref(database, `usuarios/${username}`);
-            remove(userRef)
-                .then(() => {
-                    alert('Usuario eliminado con éxito.');
-                    cargarUsuarios();
-                })
-                .catch((error) => {
-                    alert('Error al eliminar usuario: ' + error.message);
-                });
-        }
+// Eliminar usuario
+function eliminarUsuario(key) {
+    const userRef = ref(database, `usuarios/${key}`);
+    remove(userRef)
+        .then(() => {
+            alert('Usuario eliminado con éxito.');
+            cargarUsuarios();
+        })
+        .catch((error) => {
+            alert('Error al eliminar usuario: ' + error.message);
+        });
+}
 
         // Actualizar campo de usuario
         document.querySelector('#tablaUsuarios').addEventListener('input', (e) => {
@@ -209,18 +209,18 @@
             });
         }
 
-        // Eliminar licitador
-        function eliminarLicitador(id) {
-            const licitadorRef = ref(database, `licitadores/${id}`);
-            remove(licitadorRef)
-                .then(() => {
-                    alert('Licitador eliminado con éxito.');
-                    cargarLicitadores();
-                })
-                .catch((error) => {
-                    alert('Error al eliminar licitador: ' + error.message);
-                });
-        }
+// Eliminar licitador
+function eliminarLicitador(key) {
+    const licitadorRef = ref(database, `licitadores/${key}`);
+    remove(licitadorRef)
+        .then(() => {
+            alert('Licitador eliminado con éxito.');
+            cargarLicitadores();
+        })
+        .catch((error) => {
+            alert('Error al eliminar licitador: ' + error.message);
+        });
+}
 
         // Actualizar campo de licitador
         document.querySelector('#tablaLicitadores').addEventListener('input', (e) => {
