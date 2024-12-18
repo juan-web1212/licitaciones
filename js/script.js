@@ -48,10 +48,13 @@ async function validarUsuario() {
 
             // Validar contraseña en la base de datos
             if (data.password && data.password.trim() === password.trim()) {  // Asegúrate de que 'data.password' esté definido
-                if (data.tipo === 1) {  // Administrador
+                const tipo = data.tipo && data.tipo.trim();  // Asegurarse de que 'tipo' también esté definido y sin espacios extra
+                if (tipo === '1') {  // Administrador (validando tipo como string)
                     window.location.href = "inicio/admin.html";  // Redirigir al admin
-                } else if (data.tipo === 2) {  // Usuario
+                } else if (tipo === '2') {  // Usuario (validando tipo como string)
                     window.location.href = "inicio/user.html";  // Redirigir al usuario
+                } else {
+                    alert("Tipo de usuario no reconocido.");
                 }
             } else {
                 alert("Contraseña incorrecta.");
