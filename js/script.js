@@ -25,10 +25,16 @@ function cambiarImagen() {
 }
 setInterval(cambiarImagen, 4500);
 
-// Mostrar formularios
-function mostrarFormulario() {
-    const formContainer = document.getElementById("formContainer");
-    formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+// Mostrar formulario de inicio de sesión de usuario
+function mostrarFormularioUsuario() {
+    document.getElementById("formUsuarioSesion").style.display = "block";
+    document.getElementById("formLicitadorSesion").style.display = "none";
+}
+
+// Mostrar formulario de inicio de sesión de licitador
+function mostrarFormularioLicitador() {
+    document.getElementById("formLicitadorSesion").style.display = "block";
+    document.getElementById("formUsuarioSesion").style.display = "none";
 }
 
 // Validar usuario en la base de datos
@@ -80,21 +86,8 @@ function redirigirLicitador() {
     window.location.href = "inicio/licitador.html";
 }
 
-// Función para alternar los checkboxes
-function toggleTipo(tipo) {
-    const licitadorCheck = document.getElementById("licitadorCheck");
-    const usuarioCheck = document.getElementById("usuarioCheck");
-
-    if (tipo === 'licitador') {
-        usuarioCheck.checked = false; // Desmarcar el otro checkbox
-    } else {
-        licitadorCheck.checked = false; // Desmarcar el otro checkbox
-    }
-}
-
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("inicioBtn").addEventListener("mouseover", mostrarFormulario);
     document.getElementById("validarBtn").addEventListener("click", validarUsuario);
     document.getElementById("entrarLicitadorBtn").addEventListener("click", redirigirLicitador);
 });
