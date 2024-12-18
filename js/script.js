@@ -1,7 +1,7 @@
+// Configuración de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
     authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
@@ -27,42 +27,18 @@ function mostrarFormularioLicitador() {
     document.getElementById("formContainerUsuario").style.display = "none";
 }
 
-// Validar usuario
-async function validarUsuario() {
-    const username = document.getElementById("usuario").value;
-    const password = document.getElementById("contraseña").value;
+// Rotación de imágenes
+const imagenes = ["imagenes/imagen1.jpg", "imagenes/imagen2.jpg", "imagenes/imagen3.jpg"];
+let index = 0;
 
-    try {
-        const snapshot = await get(ref(database, `usuarios/${username}`));
-        if (snapshot.exists() && snapshot.val().password === password) {
-            alert("Usuario válido");
-        } else {
-            alert("Usuario o contraseña incorrectos");
-        }
-    } catch (error) {
-        alert("Error validando usuario");
-    }
-}
-
-// Validar licitador
-async function validarLicitador() {
-    const nombre = document.getElementById("nombreLicitador")?.value || "";
-    try {
-        const snapshot = await get(ref(database, `licitadores/${nombre}`));
-        if (snapshot.exists()) {
-            alert("Licitador válido");
-        } else {
-            alert("Nombre de licitador incorrecto");
-        }
-    } catch (error) {
-        alert("Error validando licitador");
-    }
+function cambiarImagen() {
+    index = (index + 1) % imagenes.length;
+    document.getElementById("imagenPrincipal").src = imagenes[index];
 }
 
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("inicioUsuarioBtn").addEventListener("click", mostrarFormularioUsuario);
     document.getElementById("inicioLicitadorBtn").addEventListener("click", mostrarFormularioLicitador);
-    document.getElementById("validarUsuarioBtn").addEventListener("click", validarUsuario);
-    document.getElementById("validarLicitadorBtn").addEventListener("click", validarLicitador);
+    setInterval(cambiarImagen, 5000); // Cambia la imagen cada 5 segundos
 });
