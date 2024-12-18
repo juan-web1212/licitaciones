@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
     authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
@@ -76,7 +77,6 @@ function redirigirLicitador() {
         return;
     }
 
-    console.log("Licitador ingresado:", nombreLicitador);
     window.location.href = "inicio/licitador.html";
 }
 
