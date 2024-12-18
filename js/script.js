@@ -53,10 +53,10 @@ async function validarUsuario() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             if (data.password === password) {
-                // Redirigir según el tipo de usuario
-                if (data.tipo === 1) {
+                // Comparar tipo como cadena
+                if (data.tipo === "1") {
                     window.location.href = "inicio/admin.html";
-                } else if (data.tipo === 2) {
+                } else if (data.tipo === "2") {
                     window.location.href = "inicio/user.html";
                 } else {
                     alert("Tipo de usuario no reconocido.");
