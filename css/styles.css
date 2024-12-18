@@ -62,7 +62,7 @@ button:hover {
 
 .text-content {
     position: fixed;
-    top: 50px; /* Mantener el título en la parte superior */
+    top: 40px; /* Mantener el título en la parte superior */
     width: 100%;
     text-align: center;
     z-index: 500;
