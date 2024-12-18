@@ -61,7 +61,7 @@ button:hover {
 }
 
 .text-content {
-    top: 20px; /* Mantener el título en la parte superior */
+    top: 50px; /* Mantener el título en la parte superior */
     width: 100%;
     text-align: center;
     z-index: 500;
