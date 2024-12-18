@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TENDERS</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="js/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,31 +15,32 @@
             <div id="formContainer" class="form-container" style="display: none;">
                 <div id="formUsuario">
                     <h3>Inicio de Sesión</h3>
-                    <input type="text" id="usuario" placeholder="Usuario" required>
-                    <input type="password" id="contraseña" placeholder="Contraseña" required>
-
-                    <!-- Checkboxes para licitador/usuario -->
+                    
+                    <!-- Botones para seleccionar tipo de inicio -->
                     <div>
-                        <input type="checkbox" id="licitadorCheck" onclick="toggleTipo('licitador')" />
-                        <label for="licitadorCheck">Licitador</label>
-                        <input type="checkbox" id="usuarioCheck" onclick="toggleTipo('usuario')" />
-                        <label for="usuarioCheck">Usuario</label>
+                        <button id="usuarioBtn" onclick="mostrarFormularioUsuario()">Inicio Usuarios</button>
+                        <button id="licitadorBtn" onclick="mostrarFormularioLicitador()">Inicio Licitadores</button>
                     </div>
 
-                    <div id="formLicitador" style="display: none;">
-                        <h3>Licitador</h3>
-                        <input type="text" id="nombreLicitador" placeholder="Nombre" required>
-                        <button id="entrarLicitadorBtn">Entrar</button>
+                    <!-- Formulario para Usuarios -->
+                    <div id="formUsuarioSesion" style="display: none;">
+                        <input type="text" id="usuario" placeholder="Usuario" required>
+                        <input type="password" id="contraseña" placeholder="Contraseña" required>
+                        <button id="validarBtn">Entrar como Usuario</button>
                     </div>
 
-                    <button id="validarBtn">Entrar</button>
+                    <!-- Formulario para Licitadores -->
+                    <div id="formLicitadorSesion" style="display: none;">
+                        <input type="text" id="nombreLicitador" placeholder="Nombre Licitador" required>
+                        <button id="entrarLicitadorBtn">Entrar como Licitador</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones11</h1>
         </div>
 
         <!-- Imagen -->
@@ -51,8 +53,5 @@
             <p>Desarrollado por Juan Sanchez</p>
         </div>
     </div>
-
-    <!-- Cargar el archivo de JS -->
-    <script type="module" src="js/script.js"></script>
 </body>
 </html>
