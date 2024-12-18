@@ -40,8 +40,8 @@ function toggleFormulario(id) {
 
 // Validar usuario
 async function validarUsuario() {
-    const username = document.getElementById("usuario").value;
-    const password = document.getElementById("contraseña").value;
+    const username = document.getElementById("usuario").value.trim();
+    const password = document.getElementById("contraseña").value.trim();
 
     if (!username || !password) {
         alert("Por favor, complete todos los campos.");
@@ -53,10 +53,13 @@ async function validarUsuario() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             if (data.password === password) {
+                // Redirigir según el tipo de usuario
                 if (data.tipo === 1) {
                     window.location.href = "inicio/admin.html";
                 } else if (data.tipo === 2) {
                     window.location.href = "inicio/user.html";
+                } else {
+                    alert("Tipo de usuario no reconocido.");
                 }
             } else {
                 alert("Contraseña incorrecta.");
@@ -66,12 +69,13 @@ async function validarUsuario() {
         }
     } catch (error) {
         console.error("Error al validar usuario:", error);
+        alert("Ocurrió un error al validar el usuario. Intente nuevamente.");
     }
 }
 
 // Validar licitador
 async function validarLicitador() {
-    const nombreLicitador = document.getElementById("nombreLicitador").value;
+    const nombreLicitador = document.getElementById("nombreLicitador").value.trim();
 
     if (!nombreLicitador) {
         alert("Por favor, complete el campo de nombre.");
