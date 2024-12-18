@@ -32,8 +32,8 @@ function mostrarFormulario() {
 
 // Validar usuario en la base de datos
 async function validarUsuario() {
-    const username = document.getElementById("usuario").value;
-    const contraseña = document.getElementById("contraseña").value;
+    const username = document.getElementById("username").value;
+    const contraseña = document.getElementById("password").value;
 
     if (!username || !contraseña) {
         alert("Por favor, complete todos los campos.");
@@ -46,7 +46,7 @@ async function validarUsuario() {
         if (snapshot.exists()) {
             const data = snapshot.val();
 
-            if (data.contraseña === contraseña) {
+            if (data.password === password) {
                 if (data.tipo === 1) {
                     window.location.href = "inicio/admin.html";
                 } else if (data.tipo === 2) {
