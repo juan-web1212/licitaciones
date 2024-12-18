@@ -3,69 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Licitadores y Productos</title>
-    <link rel="stylesheet" href="../css/user-styles.css"> <!-- Asegúrate de tener el archivo de estilos -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-    <script src="../js/user.js" defer></script> <!-- Asegúrate de tener el archivo JavaScript -->
+    <title>Usuarios - Licitaciones</title>
+    <link rel="stylesheet" href="../css/user-styles.css">
+    <script type="module" src="../js/user.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Administración de Licitadores y Productos</h1>
-    </header>
+    <div class="container">
+        <h1>Usuarios - Licitaciones</h1>
 
-    <!-- Filtro para los Licitadores -->
-    <section>
+        <!-- Tabla de Licitadores -->
         <h2>Licitadores</h2>
-        <input type="text" id="licitadoresFilter" placeholder="Filtrar licitadores..." onkeyup="filtrarLicitadores()">
+        <input type="text" id="licitadoresFilter" placeholder="Buscar Licitador" onkeyup="filtrarLicitadores()">
         <table id="licitadoresTable">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>ID</th>
-                    <th>Acción</th>
+                    <th>Nombre del Licitador</th>
+                    <th>Licitaciones Presentadas</th>
+                    <th>ID de Licitación</th>
+                    <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Las filas de los licitadores serán cargadas aquí dinámicamente -->
+                <!-- Filas generadas dinámicamente -->
             </tbody>
         </table>
-    </section>
 
-    <!-- Filtro para los Productos -->
-    <section>
+        <!-- Tabla de Productos -->
         <h2>Productos</h2>
-        <input type="text" id="productosFilter" placeholder="Filtrar productos..." onkeyup="filtrarProductos()">
+        <input type="text" id="productosFilter" placeholder="Buscar Producto" onkeyup="filtrarProductos()">
         <table id="productosTable">
             <thead>
                 <tr>
-                    <th>Producto</th>
+                    <th>Nombre del Producto</th>
                     <th>Precio</th>
+                    <th>ID de Licitación</th>
                     <th>Fecha de Vencimiento</th>
-                    <th>Licitador</th>
+                    <th>Nombre del Licitador</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Las filas de los productos serán cargadas aquí dinámicamente -->
+                <!-- Filas generadas dinámicamente -->
             </tbody>
         </table>
-    </section>
 
-    <!-- Popup para Centro de Costo -->
-    <div id="popupCentroCosto" class="popup">
-        <div class="popup-content">
-            <h2>Centro de Costo</h2>
-            <input type="text" id="centroCostoInput" placeholder="Ingrese Centro de Costo">
-            <button onclick="finalizarCompra()">Finalizar Compra</button>
-            <button onclick="cerrarPopup()">Cerrar</button>
-        </div>
+        <!-- Botones de acción -->
+        <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
+        <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 
-    <!-- Botón de Salir -->
-    <button onclick="confirmarSalir()">Salir</button>
-    
-    <footer>
-        <p>&copy; 2024 Tender Licitaciones</p>
-    </footer>
+    <!-- Pop-up para ingresar número de centro de costo -->
+    <div id="popupCentroCosto" class="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close" onclick="cerrarPopup()">&times;</span>
+            <h3>Ingrese el número de Centro de Costo</h3>
+            <input type="text" id="centroCostoInput" placeholder="Centro de Costo">
+            <button onclick="finalizarCompra()">Completar Compra</button>
+            <button onclick="cerrarPopup()" class="cancelarBtn">Cancelar</button>
+        </div>
+    </div>
 </body>
 </html>
