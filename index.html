@@ -11,20 +11,29 @@
     <div class="container">
         <!-- Menú desplegable de Inicio -->
         <div class="menu">
-            <button id="inicioBtn">Inicio</button>
-            <div id="formContainer" class="form-container" style="display: none;">
+            <button id="inicioUsuarioBtn">Inicio Usuario</button>
+            <button id="inicioLicitadorBtn">Inicio Licitador</button>
+            <div id="formContainerUsuario" class="form-container" style="display: none;">
                 <div id="formUsuario">
-                    <h3>Inicio de Sesión</h3>
+                    <h3>Inicio de Sesión Usuario</h3>
                     <input type="text" id="usuario" placeholder="Usuario" required>
                     <input type="password" id="contraseña" placeholder="Contraseña" required>
-                    <button id="validarBtn">Entrar</button>
+                    <button id="validarUsuarioBtn">Entrar</button>
+                </div>
+            </div>
+            <div id="formContainerLicitador" class="form-container" style="display: none;">
+                <div id="formLicitador">
+                    <h3>Inicio de Sesión Licitador</h3>
+                    <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+                    <input type="password" id="claveLicitador" placeholder="Clave" required>
+                    <button id="validarLicitadorBtn">Entrar</button>
                 </div>
             </div>
         </div>
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones1212</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
         </div>
 
         <!-- Imagen -->
