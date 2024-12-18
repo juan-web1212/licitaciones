@@ -30,7 +30,7 @@ function cargarLicitadores() {
                 <tr>
                     <td>${data.nombre}</td>
                     <td>${child.key}</td>
-                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
+                    <td><input type="checkbox" class="acceptCheckbox" onchange="document.getElementById('aceptarBtn').style.display = this.checked ? 'inline-block' : 'none'"></td>
                 </tr>
             `;
             tbody.innerHTML += row;
