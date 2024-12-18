@@ -9,25 +9,24 @@
 </head>
 <body>
     <div class="container">
-        <!-- Menú desplegable de Inicio -->
+        <!-- Menú desplegable -->
         <div class="menu">
             <button id="inicioUsuarioBtn">Inicio Usuario</button>
             <button id="inicioLicitadorBtn">Inicio Licitador</button>
-            <div id="formContainerUsuario" class="form-container" style="display: none;">
-                <div id="formUsuario">
-                    <h3>Inicio de Sesión Usuario</h3>
-                    <input type="text" id="usuario" placeholder="Usuario" required>
-                    <input type="password" id="contraseña" placeholder="Contraseña" required>
-                    <button id="validarUsuarioBtn">Entrar</button>
-                </div>
-            </div>
-            <div id="formContainerLicitador" class="form-container" style="display: none;">
-                <div id="formLicitador">
-                    <h3>Inicio de Sesión Licitador</h3>
-                    <input type="text" id="nombreLicitador" placeholder="Nombre" required>
-                    <button id="validarLicitadorBtn">Entrar</button>
-                </div>
-            </div>
+        </div>
+
+        <!-- Formularios -->
+        <div id="formContainerUsuario" class="form-container" style="display: none;">
+            <h3>Inicio de Sesión Usuario</h3>
+            <input type="text" id="usuario" placeholder="Usuario" required>
+            <input type="password" id="contraseña" placeholder="Contraseña" required>
+            <button id="validarUsuarioBtn">Entrar</button>
+        </div>
+
+        <div id="formContainerLicitador" class="form-container" style="display: none;">
+            <h3>Inicio de Sesión Licitador</h3>
+            <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+            <button id="validarLicitadorBtn">Entrar</button>
         </div>
 
         <!-- Título -->
