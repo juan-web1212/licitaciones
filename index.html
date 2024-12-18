@@ -9,34 +9,37 @@
 </head>
 <body>
     <div class="container">
-        <!-- Menú con botones Inicio Licitadores y Inicio Usuarios -->
+        <!-- Menú desplegable de Inicio -->
         <div class="menu">
-            <button id="inicioLicitadorBtn" onclick="mostrarFormularioLicitador()">Inicio Licitadores</button>
-            <button id="inicioUsuarioBtn" onclick="mostrarFormularioUsuario()">Inicio Usuarios</button>
-        </div>
-
-        <div id="formContainer" class="form-container" style="display: none;">
-            <div id="formUsuario">
-                <h3>Inicio de Sesión</h3>
-                
-                <!-- Formulario para Usuarios -->
-                <div id="formUsuarioSesion" style="display: none;">
+            <button id="inicioBtn">Inicio</button>
+            <div id="formContainer" class="form-container" style="display: none;">
+                <div id="formUsuario">
+                    <h3>Inicio de Sesión</h3>
                     <input type="text" id="usuario" placeholder="Usuario" required>
                     <input type="password" id="contraseña" placeholder="Contraseña" required>
-                    <button id="validarBtn">Entrar como Usuario</button>
-                </div>
 
-                <!-- Formulario para Licitadores -->
-                <div id="formLicitadorSesion" style="display: none;">
-                    <input type="text" id="nombreLicitador" placeholder="Nombre Licitador" required>
-                    <button id="entrarLicitadorBtn">Entrar como Licitador</button>
+                    <!-- Checkboxes para licitador/usuario -->
+                    <div>
+                        <input type="checkbox" id="licitadorCheck" onclick="toggleTipo('licitador')" />
+                        <label for="licitadorCheck">Licitador</label>
+                        <input type="checkbox" id="usuarioCheck" onclick="toggleTipo('usuario')" />
+                        <label for="usuarioCheck">Usuario</label>
+                    </div>
+
+                    <div id="formLicitador" style="display: none;">
+                        <h3>Licitador</h3>
+                        <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+                        <button id="entrarLicitadorBtn">Entrar</button>
+                    </div>
+
+                    <button id="validarBtn">Entrar</button>
                 </div>
             </div>
         </div>
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones1212</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones11</h1>
         </div>
 
         <!-- Imagen -->
