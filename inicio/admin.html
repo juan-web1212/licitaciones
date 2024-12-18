@@ -127,7 +127,7 @@
         }
 
         // Eliminar usuario
-        function eliminarUsuario(username) {
+        function eliminarUsuario(user) {
             const userRef = ref(database, `usuarios/${username}`);
             remove(userRef)
                 .then(() => {
