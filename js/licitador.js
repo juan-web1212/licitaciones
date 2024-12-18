@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mostrar el botón de "Aceptar" solo si se han agregado filas
         document.getElementById("aceptarBtn").style.display = 'inline-block';
-    });
+    ;
 
     // Función para manejar el evento de "Aceptar" y validar la tabla
     document.getElementById('aceptarBtn').addEventListener('click', function () {
