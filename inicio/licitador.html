@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licitador - Página de Licitacionesestoy cansado jefe</title>
+    <title>Licitador - Página de Licitaciones</title>
     <link rel="stylesheet" href="../css/licitador-styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Agregar Producto para Licitación</h1>
+        <h1>Agregar Producto para Licitación estoy</h1>
 
         <input type="text" id="nombreLicitador" placeholder="Nombre del Licitador" required>
 
@@ -28,7 +28,7 @@
         <!-- Botones de Acción -->
         <button id="agregarProductoBtn">+</button>
         <button id="aceptarBtn" style="display:none;">Aceptar</button>
-       <button id="salirBtn" onclick="if(confirmarSalir()) window.location.href = '../index.html';">Salir</button>
+       <button id="salirBtn" onclick="if(confirm('¿Estás seguro de que deseas salir?')) window.location.href = 'otra-pagina.html';">Salir</button>
         <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 </body>
