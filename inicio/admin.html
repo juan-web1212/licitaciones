@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración</h1>
+        <h1>Panel de Administración1</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -27,9 +27,8 @@
         <table id="tablaUsuarios">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo Electrónico</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -65,14 +64,13 @@
 
         <!-- Botón de Salir -->
         <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
-        <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 
     <!-- Script -->
     <script type="module">
         // Importación de Firebase
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-        import { getDatabase, ref, push, onValue, update, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+        import { getDatabase, ref, set, onValue, update, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
         // Configuración de Firebase
         const firebaseConfig = {
@@ -92,10 +90,10 @@
 
         // -------------------- USUARIOS --------------------
 
-        // Guardar nuevo usuario
+        // Guardar nuevo usuario con username como ID
         function guardarUsuario(user) {
-            const userRef = ref(database, 'usuarios');
-            return push(userRef, user);
+            const userRef = ref(database, `usuarios/${user.username}`);
+            return set(userRef, user);
         }
 
         // Cargar usuarios
@@ -109,12 +107,10 @@
                 snapshot.forEach((childSnapshot) => {
                     const user = childSnapshot.val();
                     const row = `<tr>
-                        <td>${childSnapshot.key}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="username">${user.username}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
                         <td>
                             <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
-                            <button onclick="modificarUsuario('${childSnapshot.key}')">Modificar</button>
                         </td>
                     </tr>`;
                     tablaUsuarios.innerHTML += row;
@@ -123,8 +119,8 @@
         }
 
         // Eliminar usuario
-        function eliminarUsuario(id) {
-            const userRef = ref(database, `usuarios/${id}`);
+        function eliminarUsuario(username) {
+            const userRef = ref(database, `usuarios/${username}`);
             remove(userRef)
                 .then(() => {
                     alert('Usuario eliminado con éxito.');
@@ -134,6 +130,7 @@
                     alert('Error al eliminar usuario: ' + error.message);
                 });
         }
+
         // Actualizar campo de usuario
         document.querySelector('#tablaUsuarios').addEventListener('input', (e) => {
             const key = e.target.dataset.key;
@@ -156,8 +153,8 @@
 
         // Guardar nuevo licitador
         function guardarLicitador(licitador) {
-            const licitadorRef = ref(database, 'licitadores');
-            return push(licitadorRef, licitador);
+            const licitadorRef = ref(database, `licitadores/${licitador.nombre}`);
+            return set(licitadorRef, licitador);
         }
 
         // Cargar licitadores
@@ -175,7 +172,6 @@
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
                         <td>
                             <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
-                            <button onclick="modificarUsuario('${childSnapshot.key}')">Modificar</button>
                         </td>
                     </tr>`;
                     tablaLicitadores.innerHTML += row;
@@ -184,8 +180,8 @@
         }
 
         // Eliminar licitador
-        function eliminarLicitador(id) {
-            const licitadorRef = ref(database, `licitadores/${id}`);
+        function eliminarLicitador(nombre) {
+            const licitadorRef = ref(database, `licitadores/${nombre}`);
             remove(licitadorRef)
                 .then(() => {
                     alert('Licitador eliminado con éxito.');
@@ -195,26 +191,6 @@
                     alert('Error al eliminar licitador: ' + error.message);
                 });
         }
-
-        // Actualizar campo de licitador
-        document.querySelector('#tablaLicitadores').addEventListener('input', (e) => {
-            const key = e.target.dataset.key;
-            const field = e.target.dataset.field;
-            const value = e.target.textContent;
-
-            if (key && field) {
-                const licitadorRef = ref(database, `licitadores/${key}`);
-                update(licitadorRef, { [field]: value })
-                    .then(() => {
-                        console.log('Campo actualizado:', field, value);
-                    })
-                    .catch((error) => {
-                        console.error('Error al actualizar:', error.message);
-                    });
-            }
-        });
-
-        // -------------------- INICIALIZAR --------------------
 
         // Manejo del formulario de usuarios
         document.getElementById('formUsuario').addEventListener('submit', function (e) {
