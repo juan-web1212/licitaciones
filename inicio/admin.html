@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administracióndioooos</h1>
+        <h1>Panel de Administración</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -128,7 +128,7 @@
         }
 
         // Eliminar usuario
-        function eliminarUsuario(key, button) {
+        window.eliminarUsuario = function(key, button) {
             const userRef = ref(database, `usuarios/${key}`);
             remove(userRef)
                 .then(() => {
@@ -215,7 +215,7 @@
         }
 
         // Eliminar licitador
-        function eliminarLicitador(key, button) {
+        window.eliminarLicitador = function(key, button) {
             const licitadorRef = ref(database, `licitadores/${key}`);
             remove(licitadorRef)
                 .then(() => {
