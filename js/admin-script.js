@@ -25,7 +25,7 @@ function ordenarTabla(tablaID, columnaIndex) {
 }
 import { getDatabase, ref, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
-function eliminarUsuario(id) {
+function eliminarUsuario(${childSnapshot.key}) {
     const database = getDatabase(); // Obtener la base de datos
     const userRef = ref(database, `usuarios/${id}`); // Referencia al usuario específico por su ID
     
