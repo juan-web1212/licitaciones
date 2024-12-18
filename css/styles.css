@@ -23,6 +23,8 @@ body {
     top: 20px;
     right: 20px;
     z-index: 1000;
+    display: flex;
+    gap: 10px;
 }
 
 button {
@@ -45,7 +47,8 @@ button:hover {
     margin-top: 60px;
 }
 
-#formUsuario input {
+#formUsuario input,
+#formLicitador input {
     padding: 10px;
     margin: 5px;
     width: 200px;
@@ -94,18 +97,4 @@ button:hover {
     width: 100%;
     bottom: 0;
     text-align: center;
-}
-
-/* Estilo adicional para el botón de "Inicio" */
-#inicioBtn {
-    background-color: blue; /* Fondo azul */
-    color: white; /* Texto blanco */
-    font-size: 1.1rem; /* Tamaño de texto normal */
-    border: 2px solid green; /* Borde verde */
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-#inicioBtn:hover {
-    background-color: darkblue; /* Fondo más oscuro al hacer hover */
 }
