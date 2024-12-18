@@ -13,9 +13,14 @@ body {
 
 .menu {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #333;
+    justify-content: center;
+    background-color: transparent; /* Para evitar que tenga color de fondo */
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s; /* Para el efecto de ocultar/mostrar el menú */
 }
 
 button {
@@ -26,6 +31,7 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -33,7 +39,8 @@ button:hover {
 }
 
 .form-container {
-    margin-top: 20px;
+    margin-top: 60px; /* Para que el formulario no se sobreponga con el menú */
+    display: none;
 }
 
 #formUsuarioSesion,
@@ -64,4 +71,18 @@ button:hover {
     width: 100%;
     bottom: 0;
     text-align: center;
+}
+
+/* Cuando el cursor se acerque a la parte superior, el menú aparecerá */
+body:hover .menu {
+    top: 0;
+}
+
+/* Cuando el cursor se aleja, el menú se ocultará */
+body {
+    margin-top: 60px;
+}
+
+body:hover {
+    margin-top: 0;
 }
