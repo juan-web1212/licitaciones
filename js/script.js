@@ -33,7 +33,7 @@ function mostrarFormulario() {
 // Validar usuario en la base de datos
 async function validarUsuario() {
     const username = document.getElementById("usuario").value;
-    const password = document.getElementById("contraseña").value;  // 'password' del formulario
+    const password = document.getElementById("contraseña").value;
 
     if (!username || !password) {
         alert("Por favor, complete todos los campos.");
@@ -41,18 +41,17 @@ async function validarUsuario() {
     }
 
     try {
-        const snapshot = await get(ref(database, `usuarios/${username}`));  // Consultar el nodo por el 'username'
+        const snapshot = await get(ref(database, `usuarios/${username}`)); 
 
         if (snapshot.exists()) {
             const data = snapshot.val();
 
-            // Validar contraseña en la base de datos
-            if (data.password && data.password.trim() === password.trim()) {  // Asegúrate de que 'data.password' esté definido
-                const tipo = data.tipo && data.tipo.trim();  // Asegurarse de que 'tipo' también esté definido y sin espacios extra
-                if (tipo === '1') {  // Administrador (validando tipo como string)
-                    window.location.href = "inicio/admin.html";  // Redirigir al admin
-                } else if (tipo === '2') {  // Usuario (validando tipo como string)
-                    window.location.href = "inicio/user.html";  // Redirigir al usuario
+            if (data.password && data.password.trim() === password.trim()) {
+                const tipo = data.tipo && data.tipo.trim();
+                if (tipo === '1') {
+                    window.location.href = "inicio/admin.html";
+                } else if (tipo === '2') {
+                    window.location.href = "inicio/user.html";
                 } else {
                     alert("Tipo de usuario no reconocido.");
                 }
@@ -79,6 +78,18 @@ function redirigirLicitador() {
 
     console.log("Licitador ingresado:", nombreLicitador);
     window.location.href = "inicio/licitador.html";
+}
+
+// Función para alternar los checkboxes
+function toggleTipo(tipo) {
+    const licitadorCheck = document.getElementById("licitadorCheck");
+    const usuarioCheck = document.getElementById("usuarioCheck");
+
+    if (tipo === 'licitador') {
+        usuarioCheck.checked = false; // Desmarcar el otro checkbox
+    } else {
+        licitadorCheck.checked = false; // Desmarcar el otro checkbox
+    }
 }
 
 // Eventos al cargar
