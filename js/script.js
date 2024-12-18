@@ -46,6 +46,10 @@ async function validarUsuario() {
         if (snapshot.exists()) {
             const data = snapshot.val();
 
+            // Imprimir la contraseña que se está validando para depuración
+            console.log("Contraseña ingresada:", password);
+            console.log("Contraseña en la base de datos:", data.password);
+
             // Validar contraseña en la base de datos
             if (data.password && data.password.trim() === password.trim()) {  // Asegúrate de que 'data.password' esté definido
                 if (data.tipo === 1) {  // Administrador
@@ -54,7 +58,7 @@ async function validarUsuario() {
                     window.location.href = "inicio/user.html";
                 }
             } else {
-                alert("Contraseña incorrecta.");
+                alert("Contraseña incorrecta. Contraseña ingresada: " + password + ", Contraseña registrada: " + data.password);
             }
         } else {
             alert("Usuario no encontrado.");
