@@ -86,6 +86,9 @@ async function validarLicitador() {
         const snapshot = await get(ref(database, `licitadores/${nombreLicitador}`));
         if (snapshot.exists()) {
             window.location.href = "inicio/licitador.html";
+                function navegarALicitaciones(idLicitador) {
+                    window.location.href = `licitaciones.html?id=${idLicitador}`;
+                    }
         } else {
             alert("Licitador no encontrado.");
         }
