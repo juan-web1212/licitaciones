@@ -17,11 +17,21 @@
                     <h3>Inicio de Sesión</h3>
                     <input type="text" id="usuario" placeholder="Usuario" required>
                     <input type="password" id="contraseña" placeholder="Contraseña" required>
-                    <div id="formLicitador" style="display: none;">
-                         <h3>Licitador</h3>
-                         <input type="text" id="nombreLicitador" placeholder="Nombre" required>
-                         <button id="entrarLicitadorBtn">Entrar</button>
+
+                    <!-- Checkboxes para licitador/usuario -->
+                    <div>
+                        <input type="checkbox" id="licitadorCheck" onclick="toggleTipo('licitador')" />
+                        <label for="licitadorCheck">Licitador</label>
+                        <input type="checkbox" id="usuarioCheck" onclick="toggleTipo('usuario')" />
+                        <label for="usuarioCheck">Usuario</label>
                     </div>
+
+                    <div id="formLicitador" style="display: none;">
+                        <h3>Licitador</h3>
+                        <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+                        <button id="entrarLicitadorBtn">Entrar</button>
+                    </div>
+
                     <button id="validarBtn">Entrar</button>
                 </div>
             </div>
@@ -29,7 +39,7 @@
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones1</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones11</h1>
         </div>
 
         <!-- Imagen -->
@@ -42,10 +52,5 @@
             <p>Desarrollado por Juan Sanchez</p>
         </div>
     </div>
-
-    <!-- Firebase SDK Modular -->
-    <script type="module">
-        // Asegúrate de que este script esté funcionando correctamente
-    </script>
 </body>
 </html>
