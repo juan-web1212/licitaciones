@@ -104,4 +104,3 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); // Prevenir la acción de salir si el usuario cancela
         }
     });
-});
