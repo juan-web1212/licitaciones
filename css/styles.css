@@ -15,6 +15,7 @@ body {
     width: 100%;
     height: 100vh;
     text-align: center;
+    position: relative;
 }
 
 .menu {
@@ -53,17 +54,29 @@ button:hover {
 .text-content h1 {
     font-size: 2rem;
     margin: 20px 0;
+    color: blue; /* Color de texto azul */
+    border: 2px solid green; /* Borde verde */
+    display: inline-block;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco con transparencia */
 }
 
 .image-container {
     width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra toda la pantalla */
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .footer {
