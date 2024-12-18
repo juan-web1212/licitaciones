@@ -11,32 +11,26 @@
     <div class="container">
         <!-- Menú desplegable de Inicio -->
         <div class="menu">
-            <button onclick="mostrarFormulario()">Inicio</button>
-        </div>
-
-        <!-- Formulario de autenticación -->
-        <div id="formularioAuth" class="dropdown-content" style="display: none;">
-            <h2>Inicio de Sesión</h2>
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" placeholder="Ingresa tu usuario" required>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
-            <button onclick="validarUsuario()">Ingresar</button>
-        </div>
-
-        <hr>
-
-        <!-- Formulario para Licitador -->
-        <div id="formularioLicitador" class="dropdown-content">
-            <h2>Licitador</h2>
-            <label for="licitadorName">Nombre:</label>
-            <input type="text" id="licitadorName" placeholder="Ingresa tu nombre" required>
-            <button onclick="redirigirLicitador()">Entrar</button>
+            <button id="inicioBtn">Inicio</button>
+            <div id="formContainer" class="form-container" style="display: none;">
+                <div id="formUsuario">
+                    <h3>Inicio de Sesión</h3>
+                    <input type="text" id="usuario" placeholder="Usuario" required>
+                    <input type="password" id="contraseña" placeholder="Contraseña" required>
+                    <button id="validarBtn">Entrar</button>
+                </div>
+                <hr>
+                <div id="formLicitador" style="display: none;">
+                    <h3>Licitador</h3>
+                    <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+                    <button id="entrarLicitadorBtn">Entrar</button>
+                </div>
+            </div>
         </div>
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders Licitaciones</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
         </div>
 
         <!-- Imagen -->
@@ -46,8 +40,13 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>Desarrollado por Juan Sánchez</p>
+            <p>Desarrollado por Juan Sanchez</p>
         </div>
     </div>
+
+    <!-- Firebase SDK Modular -->
+    <script type="module">
+        // Configuración de Firebase e imagen rotativa (ya incluido en script.js)
+    </script>
 </body>
 </html>
