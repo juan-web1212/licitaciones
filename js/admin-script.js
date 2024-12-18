@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-import { getDatabase, ref, set, push, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+import { getDatabase, ref, set, push, onChildAdded, onChildRemoved, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -24,26 +24,32 @@ function guardarUsuario(user) {
     return set(userRef, user);
 }
 
-// Cargar usuarios y renderizar en la tabla
+// Agregar usuario a la tabla dinámicamente
+function agregarUsuarioATabla(key, user) {
+    const tablaUsuarios = document.querySelector('#tablaUsuarios tbody');
+    const row = `
+        <tr id="usuario-${key}">
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.tipo}</td>
+            <td>
+                <button onclick="eliminarUsuario('${key}')">Eliminar</button>
+            </td>
+        </tr>`;
+    tablaUsuarios.innerHTML += row;
+}
+
+// Cargar usuarios en tiempo real
 function cargarUsuarios() {
     const userRef = ref(database, 'usuarios');
-    const tablaUsuarios = document.querySelector('#tablaUsuarios tbody');
 
-    onValue(userRef, (snapshot) => {
-        tablaUsuarios.innerHTML = ''; // Limpiar tabla
-        snapshot.forEach((childSnapshot) => {
-            const user = childSnapshot.val();
-            const row = `
-                <tr>
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
-                    <td>${user.tipo}</td>
-                    <td>
-                        <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
-                    </td>
-                </tr>`;
-            tablaUsuarios.innerHTML += row;
-        });
+    onChildAdded(userRef, (data) => {
+        agregarUsuarioATabla(data.key, data.val());
+    });
+
+    onChildRemoved(userRef, (data) => {
+        const row = document.getElementById(`usuario-${data.key}`);
+        if (row) row.remove();
     });
 }
 
@@ -89,25 +95,31 @@ function guardarLicitador(licitador) {
     return push(licitadorRef, licitador);
 }
 
-// Cargar licitadores y renderizar en la tabla
+// Agregar licitador a la tabla dinámicamente
+function agregarLicitadorATabla(key, licitador) {
+    const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
+    const row = `
+        <tr id="licitador-${key}">
+            <td>${key}</td>
+            <td>${licitador.nombre}</td>
+            <td>
+                <button onclick="eliminarLicitador('${key}')">Eliminar</button>
+            </td>
+        </tr>`;
+    tablaLicitadores.innerHTML += row;
+}
+
+// Cargar licitadores en tiempo real
 function cargarLicitadores() {
     const licitadorRef = ref(database, 'licitadores');
-    const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
 
-    onValue(licitadorRef, (snapshot) => {
-        tablaLicitadores.innerHTML = ''; // Limpiar tabla
-        snapshot.forEach((childSnapshot) => {
-            const licitador = childSnapshot.val();
-            const row = `
-                <tr>
-                    <td>${childSnapshot.key}</td>
-                    <td>${licitador.nombre}</td>
-                    <td>
-                        <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
-                    </td>
-                </tr>`;
-            tablaLicitadores.innerHTML += row;
-        });
+    onChildAdded(licitadorRef, (data) => {
+        agregarLicitadorATabla(data.key, data.val());
+    });
+
+    onChildRemoved(licitadorRef, (data) => {
+        const row = document.getElementById(`licitador-${data.key}`);
+        if (row) row.remove();
     });
 }
 
