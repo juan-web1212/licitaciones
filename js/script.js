@@ -33,7 +33,7 @@ function mostrarFormulario() {
 // Validar usuario en la base de datos
 async function validarUsuario() {
     const username = document.getElementById("usuario").value;
-    const contraseña = document.getElementById("password").value;
+    const contraseña = document.getElementById("contraseña").value;
 
     if (!username || !contraseña) {
         alert("Por favor, complete todos los campos.");
