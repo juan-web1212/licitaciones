@@ -71,7 +71,6 @@ button:hover {
 .text-content h1 {
     font-size: 2rem;
     color: blue;
-    border: 2px solid green;
     padding: 10px;
     margin: auto;
     display: inline-block;
