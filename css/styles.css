@@ -149,3 +149,15 @@ body, html {
     padding: 0;
     overflow-x: hidden;
 }
+/* styles.css */
+
+/* Estilo para los checkboxes */
+input[type="checkbox"] {
+    margin: 10px;
+    cursor: pointer;
+}
+
+label {
+    margin-right: 20px;
+    font-size: 16px;
+}
