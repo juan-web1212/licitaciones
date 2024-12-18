@@ -16,25 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Rotación de imágenes
-let imagenIndex = 1;
-function cambiarImagen() {
-    imagenIndex = (imagenIndex % 3) + 1;
-    const imagen = document.getElementById("imagenPrincipal");
-    imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
-}
-setInterval(cambiarImagen, 4500);
-
-// Mostrar formulario de inicio de sesión de usuario
-function mostrarFormularioUsuario() {
-    document.getElementById("formUsuarioSesion").style.display = "block";
-    document.getElementById("formLicitadorSesion").style.display = "none";
-}
-
-// Mostrar formulario de inicio de sesión de licitador
-function mostrarFormularioLicitador() {
-    document.getElementById("formLicitadorSesion").style.display = "block";
-    document.getElementById("formUsuarioSesion").style.display = "none";
+// Mostrar el formulario de inicio de sesión
+function mostrarFormulario() {
+    const formContainer = document.getElementById("formContainer");
+    formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
 }
 
 // Validar usuario en la base de datos
@@ -74,20 +59,8 @@ async function validarUsuario() {
     }
 }
 
-// Manejo del licitador
-function redirigirLicitador() {
-    const nombreLicitador = document.getElementById("nombreLicitador").value;
-
-    if (!nombreLicitador) {
-        alert("Por favor, complete el campo de nombre.");
-        return;
-    }
-
-    window.location.href = "inicio/licitador.html";
-}
-
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("inicioBtn").addEventListener("click", mostrarFormulario);
     document.getElementById("validarBtn").addEventListener("click", validarUsuario);
-    document.getElementById("entrarLicitadorBtn").addEventListener("click", redirigirLicitador);
 });
