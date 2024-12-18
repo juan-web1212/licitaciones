@@ -1,45 +1,75 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const tabla = document.getElementById('licitaciones-table').querySelector('tbody');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-    // Obtener datos de licitaciones desde el backend
-    fetch('http://localhost:3000/licitaciones')
-        .then(response => response.json())
-        .then(licitaciones => {
-            licitaciones.forEach(licitacion => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${licitacion.id}</td>
-                    <td>${licitacion.nombre}</td>
-                    <td>${licitacion.descripcion}</td>
-                    <td>${licitacion.fecha}</td>
-                `;
-                tabla.appendChild(fila);
-            });
-        })
-        .catch(error => {
-            console.error('Error al obtener licitaciones:', error);
-        });
-});
-function redirigirPagina() {
-    const role = document.getElementById('role').value.toLowerCase(); // Obtiene y convierte el rol a minúsculas
-    let url = '';
+// Configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
+    authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
+    databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
+    projectId: "tenderlicitaciones-9ba50",
+    storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
+    messagingSenderId: "531013447459",
+    appId: "1:531013447459:web:07580f26176abe2fe62696",
+    measurementId: "G-E9RJCXF5MC"
+};
 
-    // Define las rutas para cada rol
-    switch (role) {
-        case 'admin':
-            url = 'inicio/admin.html'; // Página para administradores
-            break;
-        case 'user':
-            url = 'inicio/user.html'; // Página para usuarios
-            break;
-        case 'licitador':
-            url = 'inicio/licitador.html'; // Página para licitadores
-            break;
-        default:
-            alert('Por favor, escribe un rol válido: admin, user o licitador');
-            return; // No redirige si el rol no es válido
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Mostrar el formulario de inicio de sesión
+function mostrarFormulario() {
+    document.getElementById('formularioAuth').style.display = 'block';
+}
+
+// Validar usuario y contraseña
+async function validarUsuario() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !password) {
+        alert('Por favor, completa todos los campos.');
+        return;
     }
 
-    // Redirige a la página correspondiente
-    window.location.href = url;
-};
+    try {
+        const dbRef = ref(database);
+        const snapshot = await get(child(dbRef, `usuarios/${username}`));
+
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+
+            if (userData.password === password) {
+                if (userData.tipo === 1) {
+                    // Redirigir a la página de admin
+                    window.location.href = 'inicio/admin.html';
+                } else if (userData.tipo === 2) {
+                    // Redirigir a la página de user
+                    window.location.href = 'inicio/user.html';
+                } else {
+                    alert('Tipo de usuario no válido.');
+                }
+            } else {
+                alert('Contraseña incorrecta.');
+            }
+        } else {
+            alert('Usuario no encontrado.');
+        }
+    } catch (error) {
+        console.error('Error al validar el usuario:', error);
+        alert('Ocurrió un error. Por favor, intenta nuevamente.');
+    }
+}
+
+// Redirigir al licitador
+function redirigirLicitador() {
+    const licitadorName = document.getElementById('licitadorName').value.trim();
+
+    if (!licitadorName) {
+        alert('Por favor, ingresa tu nombre.');
+        return;
+    }
+
+    // Redirigir al formulario del licitador
+    window.location.href = 'inicio/licitador.html';
+}
