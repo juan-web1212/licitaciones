@@ -21,8 +21,16 @@ const database = getDatabase(app);
 document.addEventListener('DOMContentLoaded', () => {
 
     // Función para agregar una nueva fila a la tabla
-    document.getElementById('agregarProductoBtn').addEventListener('click', function () {
-        const tabla = document.getElementById('tablaLicitaciones').getElementsByTagName('tbody')[0];
+    const tablaElement = document.getElementById('tablaLicitaciones');
+    if (tablaElement) {
+        const tbody = tablaElement.getElementsByTagName('tbody')[0];
+        if (tbody) {
+            console.log('Elemento tbody encontrado:', tbody);
+        } else {
+            console.error('El elemento tbody no existe en la tabla.');
+        }
+    } else {
+        console.error('El elemento #tablaLicitaciones no existe.');
 
         const nuevaFila = tabla.insertRow();  // Crear nueva fila
 
