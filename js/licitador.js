@@ -17,9 +17,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Obtener el parámetro 'id' de la URL (ID del licitador)
-const params = new URLSearchParams(window.location.search);
-const idLicitador = params.get('id');
+// Obtener el ID del licitador desde sessionStorage
+const idLicitador = sessionStorage.getItem("idLicitador");
 
 if (idLicitador) {
     obtenerNombreLicitador(idLicitador);
