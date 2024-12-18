@@ -176,7 +176,7 @@
                 .then(() => {
                     document.getElementById('messageUsuarios').innerHTML = "<p>Usuario registrado con éxito.</p>";
                     document.getElementById('formUsuario').reset();
-                    cargarUsuarios();
+                    cargarUsuarios(); // Recargar la lista de usuarios sin duplicar
                 })
                 .catch((error) => {
                     document.getElementById('messageUsuarios').innerHTML = "<p>Error al registrar el usuario: " + error.message + "</p>";
@@ -260,7 +260,7 @@
                 .then(() => {
                     document.getElementById('messageLicitadores').innerHTML = "<p>Licitador registrado con éxito.</p>";
                     document.getElementById('formLicitador').reset();
-                    cargarLicitadores();
+                    cargarLicitadores(); // Recargar la lista de licitadores sin duplicar
                 })
                 .catch((error) => {
                     document.getElementById('messageLicitadores').innerHTML = "<p>Error al registrar el licitador: " + error.message + "</p>";
