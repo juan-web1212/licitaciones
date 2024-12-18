@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TENDERS</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="js/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -16,21 +17,11 @@
                     <h3>Inicio de Sesión</h3>
                     <input type="text" id="usuario" placeholder="Usuario" required>
                     <input type="password" id="contraseña" placeholder="Contraseña" required>
-
-                    <!-- Checkboxes para licitador/usuario -->
-                    <div>
-                        <input type="checkbox" id="licitadorCheck" onclick="toggleTipo('licitador')" />
-                        <label for="licitadorCheck">Licitador</label>
-                        <input type="checkbox" id="usuarioCheck" onclick="toggleTipo('usuario')" />
-                        <label for="usuarioCheck">Usuario</label>
-                    </div>
-
                     <div id="formLicitador" style="display: none;">
-                        <h3>Licitador</h3>
-                        <input type="text" id="nombreLicitador" placeholder="Nombre" required>
-                        <button id="entrarLicitadorBtn">Entrar</button>
+                         <h3>Licitador</h3>
+                         <input type="text" id="nombreLicitador" placeholder="Nombre" required>
+                         <button id="entrarLicitadorBtn">Entrar</button>
                     </div>
-
                     <button id="validarBtn">Entrar</button>
                 </div>
             </div>
@@ -38,7 +29,7 @@
 
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones</h1>
+            <h1>Bienvenido al sistema de Tenders licitaciones1</h1>
         </div>
 
         <!-- Imagen -->
@@ -52,7 +43,9 @@
         </div>
     </div>
 
-    <!-- Cargar el archivo de JS -->
-    <script type="module" src="js/script.js"></script>
+    <!-- Firebase SDK Modular -->
+    <script type="module">
+        // Asegúrate de que este script esté funcionando correctamente
+    </script>
 </body>
 </html>
