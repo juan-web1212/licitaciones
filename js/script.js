@@ -32,7 +32,7 @@ function mostrarFormulario() {
 
 // Validar usuario en la base de datos
 async function validarUsuario() {
-    const username = document.getElementById("username").value;
+    const username = document.getElementById("usuario").value;
     const contraseña = document.getElementById("password").value;
 
     if (!username || !contraseña) {
@@ -41,7 +41,7 @@ async function validarUsuario() {
     }
 
     try {
-        const snapshot = await get(ref(database, `usuarios/${username}`));
+        const snapshot = await get(ref(database, `usuarios/${usuario}`));
 
         if (snapshot.exists()) {
             const data = snapshot.val();
