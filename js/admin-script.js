@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-import { getDatabase, ref, set, push, onValue, update, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+import { getDatabase, ref, set, push, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -7,42 +7,41 @@ const firebaseConfig = {
     authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
     databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
     projectId: "tenderlicitaciones-9ba50",
-    storageBucket: "tenderlicitaciones-9ba50.firebaseapp.com",
+    storageBucket: "tenderlicitaciones-9ba50.appspot.com",
     messagingSenderId: "531013447459",
     appId: "1:531013447459:web:07580f26176abe2fe62696",
-    measurementId: "G-E9RJCXF5MC"
 };
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// -------------------- USUARIOS --------------------
+// ------------------- USUARIOS -------------------
 
-// Guardar nuevo usuario con username como ID
+// Guardar usuario
 function guardarUsuario(user) {
     const userRef = ref(database, `usuarios/${user.username}`);
     return set(userRef, user);
 }
 
-// Cargar usuarios
+// Cargar usuarios y renderizar en la tabla
 function cargarUsuarios() {
     const userRef = ref(database, 'usuarios');
     const tablaUsuarios = document.querySelector('#tablaUsuarios tbody');
-    tablaUsuarios.innerHTML = '';
 
     onValue(userRef, (snapshot) => {
-        tablaUsuarios.innerHTML = ''; // Limpiar tabla antes de recargar datos
+        tablaUsuarios.innerHTML = ''; // Limpiar tabla
         snapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
-            const row = `<tr>
-                <td contenteditable="true" data-key="${childSnapshot.key}" data-field="username">${user.username}</td>
-                <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
-                <td contenteditable="true" data-key="${childSnapshot.key}" data-field="tipo">${user.tipo}</td>
-                <td>
-                    <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
-                </td>
-            </tr>`;
+            const row = `
+                <tr>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.tipo}</td>
+                    <td>
+                        <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
+                    </td>
+                </tr>`;
             tablaUsuarios.innerHTML += row;
         });
     });
@@ -54,7 +53,6 @@ function eliminarUsuario(username) {
     remove(userRef)
         .then(() => {
             alert('Usuario eliminado con éxito.');
-            cargarUsuarios();
         })
         .catch((error) => {
             alert('Error al eliminar usuario: ' + error.message);
@@ -62,8 +60,8 @@ function eliminarUsuario(username) {
 }
 window.eliminarUsuario = eliminarUsuario;
 
-// Manejo del formulario de usuarios
-document.getElementById('formUsuario').addEventListener('submit', function (e) {
+// Registrar usuario desde formulario
+document.getElementById('formUsuario').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const user = {
@@ -75,40 +73,39 @@ document.getElementById('formUsuario').addEventListener('submit', function (e) {
 
     guardarUsuario(user)
         .then(() => {
-            document.getElementById('messageUsuarios').innerHTML = "<p>Usuario registrado con éxito.</p>";
+            document.getElementById('messageUsuarios').innerHTML = '<p>Usuario registrado con éxito.</p>';
             document.getElementById('formUsuario').reset();
-            cargarUsuarios();
         })
         .catch((error) => {
-            document.getElementById('messageUsuarios').innerHTML = "<p>Error al registrar el usuario: " + error.message + "</p>";
+            document.getElementById('messageUsuarios').innerHTML = `<p>Error: ${error.message}</p>`;
         });
 });
 
-// -------------------- LICITADORES --------------------
+// ------------------- LICITADORES -------------------
 
-// Guardar nuevo licitador
+// Guardar licitador
 function guardarLicitador(licitador) {
     const licitadorRef = ref(database, 'licitadores');
     return push(licitadorRef, licitador);
 }
 
-// Cargar licitadores
+// Cargar licitadores y renderizar en la tabla
 function cargarLicitadores() {
     const licitadorRef = ref(database, 'licitadores');
     const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
-    tablaLicitadores.innerHTML = '';
 
     onValue(licitadorRef, (snapshot) => {
-        tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
+        tablaLicitadores.innerHTML = ''; // Limpiar tabla
         snapshot.forEach((childSnapshot) => {
             const licitador = childSnapshot.val();
-            const row = `<tr>
-                <td>${childSnapshot.key}</td>
-                <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
-                <td>
-                    <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
-                </td>
-            </tr>`;
+            const row = `
+                <tr>
+                    <td>${childSnapshot.key}</td>
+                    <td>${licitador.nombre}</td>
+                    <td>
+                        <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
+                    </td>
+                </tr>`;
             tablaLicitadores.innerHTML += row;
         });
     });
@@ -120,7 +117,6 @@ function eliminarLicitador(id) {
     remove(licitadorRef)
         .then(() => {
             alert('Licitador eliminado con éxito.');
-            cargarLicitadores();
         })
         .catch((error) => {
             alert('Error al eliminar licitador: ' + error.message);
@@ -128,8 +124,8 @@ function eliminarLicitador(id) {
 }
 window.eliminarLicitador = eliminarLicitador;
 
-// Manejo del formulario de licitadores
-document.getElementById('formLicitador').addEventListener('submit', function (e) {
+// Registrar licitador desde formulario
+document.getElementById('formLicitador').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const licitador = {
@@ -138,15 +134,14 @@ document.getElementById('formLicitador').addEventListener('submit', function (e)
 
     guardarLicitador(licitador)
         .then(() => {
-            document.getElementById('messageLicitadores').innerHTML = "<p>Licitador registrado con éxito.</p>";
+            document.getElementById('messageLicitadores').innerHTML = '<p>Licitador registrado con éxito.</p>';
             document.getElementById('formLicitador').reset();
-            cargarLicitadores();
         })
         .catch((error) => {
-            document.getElementById('messageLicitadores').innerHTML = "<p>Error al registrar el licitador: " + error.message + "</p>";
+            document.getElementById('messageLicitadores').innerHTML = `<p>Error: ${error.message}</p>`;
         });
 });
 
-// Cargar datos al iniciar
+// ------------------- INICIAR CARGA -------------------
 cargarUsuarios();
 cargarLicitadores();
