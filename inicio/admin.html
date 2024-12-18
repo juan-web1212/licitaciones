@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración</h1>
+        <h1>Panel de Administración1212</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -113,31 +113,34 @@
                 tablaUsuarios.innerHTML = ''; // Limpiar tabla antes de recargar datos
                 snapshot.forEach((childSnapshot) => {
                     const user = childSnapshot.val();
-                    const row = `<tr>
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="username">${user.username}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="tipo">${user.tipo}</td>
                         <td>
-                            <button onclick="eliminarUsuario('${childSnapshot.key}')">Eliminar</button>
+                            <button onclick="eliminarUsuario('${childSnapshot.key}', this.closest('tr'))">Eliminar</button>
                         </td>
-                    </tr>`;
-                    tablaUsuarios.innerHTML += row;
+                    `;
+                    tablaUsuarios.appendChild(row);
                 });
             });
         }
 
-// Eliminar usuario
-function eliminarUsuario(key) {
-    const userRef = ref(database, `usuarios/${key}`);
-    remove(userRef)
-        .then(() => {
-            alert('Usuario eliminado con éxito.');
-            cargarUsuarios();
-        })
-        .catch((error) => {
-            alert('Error al eliminar usuario: ' + error.message);
-        });
-}
+        // Eliminar usuario
+        function eliminarUsuario(key, row) {
+            const userRef = ref(database, `usuarios/${key}`);
+            remove(userRef)
+                .then(() => {
+                    // Eliminar la fila de la tabla
+                    row.remove(); 
+                    alert('Usuario eliminado con éxito.');
+                    cargarUsuarios();
+                })
+                .catch((error) => {
+                    alert('Error al eliminar usuario: ' + error.message);
+                });
+        }
 
         // Actualizar campo de usuario
         document.querySelector('#tablaUsuarios').addEventListener('input', (e) => {
@@ -197,30 +200,33 @@ function eliminarUsuario(key) {
                 tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
                 snapshot.forEach((childSnapshot) => {
                     const licitador = childSnapshot.val();
-                    const row = `<tr>
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                         <td>${childSnapshot.key}</td>
                         <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
                         <td>
-                            <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
+                            <button onclick="eliminarLicitador('${childSnapshot.key}', this.closest('tr'))">Eliminar</button>
                         </td>
-                    </tr>`;
-                    tablaLicitadores.innerHTML += row;
+                    `;
+                    tablaLicitadores.appendChild(row);
                 });
             });
         }
 
-// Eliminar licitador
-function eliminarLicitador(key) {
-    const licitadorRef = ref(database, `licitadores/${key}`);
-    remove(licitadorRef)
-        .then(() => {
-            alert('Licitador eliminado con éxito.');
-            cargarLicitadores();
-        })
-        .catch((error) => {
-            alert('Error al eliminar licitador: ' + error.message);
-        });
-}
+        // Eliminar licitador
+        function eliminarLicitador(key, row) {
+            const licitadorRef = ref(database, `licitadores/${key}`);
+            remove(licitadorRef)
+                .then(() => {
+                    // Eliminar la fila de la tabla
+                    row.remove(); 
+                    alert('Licitador eliminado con éxito.');
+                    cargarLicitadores();
+                })
+                .catch((error) => {
+                    alert('Error al eliminar licitador: ' + error.message);
+                });
+        }
 
         // Actualizar campo de licitador
         document.querySelector('#tablaLicitadores').addEventListener('input', (e) => {
