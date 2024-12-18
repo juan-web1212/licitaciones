@@ -47,6 +47,7 @@ agregarProductoBtn.addEventListener('click', () => {
 
     // Mostrar el botón de "Aceptar" solo si se han agregado filas
     aceptarBtn.style.display = 'inline-block';
+    nombreLicitador.style.display = 'block'
 });
 
 // Evento para validar y guardar datos en Firebase al hacer clic en "Aceptar"
