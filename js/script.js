@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -17,59 +17,78 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Mostrar el formulario de inicio de sesión
+// Cambiar las imágenes automáticamente
+let imagenIndex = 1;
+function cambiarImagen() {
+    imagenIndex = (imagenIndex % 3) + 1;
+    const imagen = document.getElementById("imagenPrincipal");
+    imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
+}
+setInterval(cambiarImagen, 4500);
+
+// Mostrar el formulario correspondiente
 function mostrarFormulario() {
-    document.getElementById('formularioAuth').style.display = 'block';
+    const formContainer = document.getElementById("formContainer");
+    const formUsuario = document.getElementById("formUsuario");
+    const formLicitador = document.getElementById("formLicitador");
+
+    // Alternar la visibilidad del formulario
+    formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+    formUsuario.style.display = "block"; // Mostrar por defecto el formulario de usuario
+    formLicitador.style.display = "none";
 }
 
-// Validar usuario y contraseña
+// Validar el usuario y contraseña desde la base de datos
 async function validarUsuario() {
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const usuario = document.getElementById("usuario").value;
+    const contraseña = document.getElementById("contraseña").value;
 
-    if (!username || !password) {
-        alert('Por favor, completa todos los campos.');
+    if (!usuario || !contraseña) {
+        alert("Por favor, complete todos los campos.");
         return;
     }
 
     try {
-        const dbRef = ref(database);
-        const snapshot = await get(child(dbRef, `usuarios/${username}`));
+        const snapshot = await get(ref(database, `usuarios/${usuario}`));
 
         if (snapshot.exists()) {
-            const userData = snapshot.val();
+            const data = snapshot.val();
 
-            if (userData.password === password) {
-                if (userData.tipo === 1) {
-                    // Redirigir a la página de admin
-                    window.location.href = 'inicio/admin.html';
-                } else if (userData.tipo === 2) {
-                    // Redirigir a la página de user
-                    window.location.href = 'inicio/user.html';
-                } else {
-                    alert('Tipo de usuario no válido.');
+            if (data.contraseña === contraseña) {
+                if (data.tipo === 1) {
+                    window.location.href = "inicio/admin.html"; // Redirigir al panel de admin
+                } else if (data.tipo === 2) {
+                    window.location.href = "inicio/user.html"; // Redirigir al panel de usuario
                 }
             } else {
-                alert('Contraseña incorrecta.');
+                alert("Contraseña incorrecta.");
             }
         } else {
-            alert('Usuario no encontrado.');
+            alert("Usuario no encontrado.");
         }
     } catch (error) {
-        console.error('Error al validar el usuario:', error);
-        alert('Ocurrió un error. Por favor, intenta nuevamente.');
+        console.error("Error al validar el usuario:", error);
+        alert("Ocurrió un error al validar el usuario.");
     }
 }
 
-// Redirigir al licitador
+// Manejar la redirección para licitador
 function redirigirLicitador() {
-    const licitadorName = document.getElementById('licitadorName').value.trim();
+    const nombreLicitador = document.getElementById("nombreLicitador").value;
 
-    if (!licitadorName) {
-        alert('Por favor, ingresa tu nombre.');
+    if (!nombreLicitador) {
+        alert("Por favor, complete el campo de nombre.");
         return;
     }
 
-    // Redirigir al formulario del licitador
-    window.location.href = 'inicio/licitador.html';
+    // Guardar el nombre del licitador en la base de datos o continuar con el flujo
+    console.log("Licitador ingresado:", nombreLicitador);
+    window.location.href = "inicio/licitador.html"; // Redirigir a la página de licitador
 }
+
+// Asignar los eventos al cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("inicioBtn").addEventListener("click", mostrarFormulario);
+    document.getElementById("validarBtn").addEventListener("click", validarUsuario);
+    document.getElementById("entrarLicitadorBtn").addEventListener("click", redirigirLicitador);
+});
