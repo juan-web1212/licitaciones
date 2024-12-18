@@ -5,22 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TENDERS</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Menú desplegable de Inicio -->
-<div class="menu">
-    <button onclick="document.getElementById('roleMenu').classList.toggle('show')">Inicio</button>
-    <div id="roleMenu" class="dropdown-content">
-        <label for="role">Usuario</label>
-        <input type="text" name="role" id="role" placeholder="Escribe 'admin', 'user' o 'licitador'" required>
-        <button onclick="redirigirPagina()">Seleccionar</button>
-    </div>
-</div>
+        <div class="menu">
+            <button onclick="mostrarFormulario()">Inicio</button>
+        </div>
+
+        <!-- Formulario de autenticación -->
+        <div id="formularioAuth" class="dropdown-content" style="display: none;">
+            <h2>Inicio de Sesión</h2>
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" placeholder="Ingresa tu usuario" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+            <button onclick="validarUsuario()">Ingresar</button>
+        </div>
+
+        <hr>
+
+        <!-- Formulario para Licitador -->
+        <div id="formularioLicitador" class="dropdown-content">
+            <h2>Licitador</h2>
+            <label for="licitadorName">Nombre:</label>
+            <input type="text" id="licitadorName" placeholder="Ingresa tu nombre" required>
+            <button onclick="redirigirLicitador()">Entrar</button>
+        </div>
+
         <!-- Título -->
         <div class="text-content">
-            <h1>Bienvenido al sistema de Tenders licitaciones3</h1>
+            <h1>Bienvenido al sistema de Tenders Licitaciones</h1>
         </div>
 
         <!-- Imagen -->
@@ -30,39 +46,8 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>Desarrollado por Juan Sanchez</p>
+            <p>Desarrollado por Juan Sánchez</p>
         </div>
     </div>
-<!-- Firebase SDK Modular -->
-    <script type="module">
-        // Importar Firebase SDK modular
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
-            authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
-            databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
-            projectId: "tenderlicitaciones-9ba50",
-            storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
-            messagingSenderId: "531013447459",
-            appId: "1:531013447459:web:07580f26176abe2fe62696",
-            measurementId: "G-E9RJCXF5MC"
-        };
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // Función para cambiar las imágenes automáticamente
-        let imagenIndex = 1;
-        function cambiarImagen() {
-            imagenIndex = (imagenIndex % 3) + 1;
-            const imagen = document.getElementById('imagenPrincipal');
-            imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
-        }
-        setInterval(cambiarImagen, 4500);
-    </script>
 </body>
 </html>
