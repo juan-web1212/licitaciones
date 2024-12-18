@@ -3,14 +3,14 @@ import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/9.
 
 // Configuración de Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
-    authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
-    databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
-    projectId: "tenderlicitaciones-9ba50",
-    storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
-    messagingSenderId: "531013447459",
-    appId: "1:531013447459:web:07580f26176abe2fe62696",
-    measurementId: "G-E9RJCXF5MC"
+            apiKey: "AIzaSyCUHHGPBdN2VAWaF_J7wYqZ54sPBxy1RFs",
+            authDomain: "tenderlicitaciones-9ba50.firebaseapp.com",
+            databaseURL: "https://tenderlicitaciones-9ba50-default-rtdb.firebaseio.com/",
+            projectId: "tenderlicitaciones-9ba50",
+            storageBucket: "tenderlicitaciones-9ba50.firebasestorage.app",
+            messagingSenderId: "531013447459",
+            appId: "1:531013447459:web:07580f26176abe2fe62696",
+            measurementId: "G-E9RJCXF5MC"
 };
 
 // Inicializar Firebase
@@ -29,8 +29,9 @@ function cargarLicitadores() {
             const row = `
                 <tr>
                     <td>${data.nombre}</td>
+                    <td>${data.licitacionesPresentadas}</td>
                     <td>${child.key}</td>
-                    <td><input type="checkbox" class="acceptCheckbox" onchange="checkLicitadores()"></td>
+                    <td><input type="checkbox" onchange="checkLicitadores()"></td>
                 </tr>
             `;
             tbody.innerHTML += row;
@@ -52,6 +53,7 @@ function cargarProductos() {
                 <tr>
                     <td>${data.nombreProducto}</td>
                     <td>${data.precio}</td>
+                    <td>${child.key}</td>
                     <td>${fechaVencimiento}</td>
                     <td>${data.nombreLicitador}</td>
                 </tr>
@@ -66,6 +68,7 @@ function calcularFechaVencimiento(dias) {
     const fecha = new Date();
     fecha.setDate(fecha.getDate() + dias);
     return fecha.toISOString().split('T')[0];
+
 }
 
 // Filtrar Productos
@@ -105,6 +108,7 @@ window.mostrarCentroCostoPopup = mostrarCentroCostoPopup;
 window.cerrarPopup = cerrarPopup;
 window.confirmarSalir = confirmarSalir;
 
+
 // Función para filtrar los licitadores
 function filtrarLicitadores() {
     const filter = document.getElementById('licitadoresFilter').value.toLowerCase();
@@ -120,7 +124,6 @@ function filtrarLicitadores() {
         }
     }
 }
-
 // Función para verificar si se seleccionaron licitadores
 function checkLicitadores() {
     const checkboxes = document.querySelectorAll('.acceptCheckbox:checked');
@@ -131,7 +134,6 @@ function checkLicitadores() {
         acceptButton.style.display = 'none';
     }
 }
-
 // Función para completar la compra
 function finalizarCompra() {
     const centroCosto = document.getElementById('centroCostoInput').value;
