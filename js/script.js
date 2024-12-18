@@ -59,6 +59,15 @@ async function validarUsuario() {
     }
 }
 
+// Función para rotar las imágenes
+let imagenIndex = 1;
+function cambiarImagen() {
+    imagenIndex = (imagenIndex % 3) + 1;
+    const imagen = document.getElementById("imagenPrincipal");
+    imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
+}
+setInterval(cambiarImagen, 4500);
+
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("inicioBtn").addEventListener("click", mostrarFormulario);
