@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración eliminar</h1>
+        <h1>Panel de Administración</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -24,7 +24,6 @@
             <button type="submit">Registrar Usuario</button>
         </form>
 
-        <!-- Mensajes de estado -->
         <div id="messageUsuarios"></div>
 
         <!-- Tabla de Usuarios -->
@@ -39,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los datos serán llenados dinámicamente -->
+                <!-- Datos dinámicos -->
             </tbody>
         </table>
 
@@ -50,7 +49,6 @@
             <button type="submit">Registrar Licitador</button>
         </form>
 
-        <!-- Mensajes de estado -->
         <div id="messageLicitadores"></div>
 
         <!-- Tabla de Licitadores -->
@@ -64,16 +62,15 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los datos serán llenados dinámicamente -->
+                <!-- Datos dinámicos -->
             </tbody>
         </table>
 
-        <!-- Botón de Salir -->
+        <!-- Botones adicionales -->
         <button id="salirBtn" onclick="if(confirm('¿Estás seguro de que deseas salir?')) window.location.href = '../index.html';">Salir</button>
         <button id="aceptarBtn" onclick="mostrarCentroCostoPopup()" style="display: none;">Aceptar</button>
     </div>
 
-    <!-- Script -->
     <script type="module" src="admin.js"></script>
 </body>
 </html>
