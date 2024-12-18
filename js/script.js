@@ -16,60 +16,57 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Mostrar el formulario de inicio de sesión
-function mostrarFormulario() {
-    const formContainer = document.getElementById("formContainer");
-    formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+// Mostrar los formularios
+function mostrarFormularioUsuario() {
+    document.getElementById("formContainerUsuario").style.display = "block";
+    document.getElementById("formContainerLicitador").style.display = "none";
 }
 
-// Validar usuario en la base de datos
+function mostrarFormularioLicitador() {
+    document.getElementById("formContainerLicitador").style.display = "block";
+    document.getElementById("formContainerUsuario").style.display = "none";
+}
+
+// Validar usuarios
 async function validarUsuario() {
     const username = document.getElementById("usuario").value;
     const password = document.getElementById("contraseña").value;
 
-    if (!username || !password) {
-        alert("Por favor, complete todos los campos.");
-        return;
-    }
-
     try {
-        const snapshot = await get(ref(database, `usuarios/${username}`)); 
+        const snapshot = await get(ref(database, `usuarios/${username}`));
 
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-
-            if (data.password && data.password.trim() === password.trim()) {
-                const tipo = data.tipo && data.tipo.trim();
-                if (tipo === '1') {
-                    window.location.href = "inicio/admin.html";
-                } else if (tipo === '2') {
-                    window.location.href = "inicio/user.html";
-                } else {
-                    alert("Tipo de usuario no reconocido.");
-                }
-            } else {
-                alert("Contraseña incorrecta.");
-            }
+        if (snapshot.exists() && snapshot.val().password === password) {
+            alert("Usuario válido");
         } else {
-            alert("Usuario no encontrado.");
+            alert("Usuario o contraseña incorrectos");
         }
     } catch (error) {
-        console.error("Error al validar el usuario:", error);
-        alert("Ocurrió un error al validar el usuario.");
+        alert("Error validando usuario");
     }
 }
 
-// Función para rotar las imágenes
-let imagenIndex = 1;
-function cambiarImagen() {
-    imagenIndex = (imagenIndex % 3) + 1;
-    const imagen = document.getElementById("imagenPrincipal");
-    imagen.src = `imagenes/imagen${imagenIndex}.jpg`;
+// Validar licitadores
+async function validarLicitador() {
+    const nombre = document.getElementById("nombreLicitador").value;
+    const clave = document.getElementById("claveLicitador").value;
+
+    try {
+        const snapshot = await get(ref(database, `licitadores/${nombre}`));
+
+        if (snapshot.exists() && snapshot.val().clave === clave) {
+            alert("Licitador válido");
+        } else {
+            alert("Licitador o clave incorrectos");
+        }
+    } catch (error) {
+        alert("Error validando licitador");
+    }
 }
-setInterval(cambiarImagen, 4500);
 
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("inicioBtn").addEventListener("click", mostrarFormulario);
-    document.getElementById("validarBtn").addEventListener("click", validarUsuario);
+    document.getElementById("inicioUsuarioBtn").addEventListener("click", mostrarFormularioUsuario);
+    document.getElementById("inicioLicitadorBtn").addEventListener("click", mostrarFormularioLicitador);
+    document.getElementById("validarUsuarioBtn").addEventListener("click", validarUsuario);
+    document.getElementById("validarLicitadorBtn").addEventListener("click", validarLicitador);
 });
