@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración4</h1>
+        <h1>Panel de Administración</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -43,6 +43,31 @@
             </tbody>
         </table>
 
+        <!-- Formulario para registrar licitadores -->
+        <h2>Registrar Nuevo Licitador</h2>
+        <form id="formLicitador">
+            <input type="text" id="nombreLicitador" placeholder="Nombre del Licitador" required>
+            <button type="submit">Registrar Licitador</button>
+        </form>
+
+        <!-- Mensajes de estado -->
+        <div id="messageLicitadores"></div>
+
+        <!-- Tabla de Licitadores -->
+        <h2>Tabla de Licitadores</h2>
+        <table id="tablaLicitadores">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos serán llenados dinámicamente -->
+            </tbody>
+        </table>
+
         <!-- Botón de Salir -->
         <button id="salirBtn" onclick="confirmarSalir()">Salir</button>
     </div>
@@ -51,7 +76,7 @@
     <script type="module">
         // Importación de Firebase
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-        import { getDatabase, ref, set, onValue, update, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+        import { getDatabase, ref, set, push, onValue, update, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 
         // Configuración de Firebase
         const firebaseConfig = {
@@ -153,8 +178,89 @@
                 });
         });
 
+        // -------------------- LICITADORES --------------------
+
+        // Guardar nuevo licitador
+        function guardarLicitador(licitador) {
+            const licitadorRef = ref(database, 'licitadores');
+            return push(licitadorRef, licitador);
+        }
+
+        // Cargar licitadores
+        function cargarLicitadores() {
+            const licitadorRef = ref(database, 'licitadores');
+            const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
+            tablaLicitadores.innerHTML = '';
+
+            onValue(licitadorRef, (snapshot) => {
+                tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
+                snapshot.forEach((childSnapshot) => {
+                    const licitador = childSnapshot.val();
+                    const row = `<tr>
+                        <td>${childSnapshot.key}</td>
+                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
+                        <td>
+                            <button onclick="eliminarLicitador('${childSnapshot.key}')">Eliminar</button>
+                        </td>
+                    </tr>`;
+                    tablaLicitadores.innerHTML += row;
+                });
+            });
+        }
+
+        // Eliminar licitador
+        function eliminarLicitador(id) {
+            const licitadorRef = ref(database, `licitadores/${id}`);
+            remove(licitadorRef)
+                .then(() => {
+                    alert('Licitador eliminado con éxito.');
+                    cargarLicitadores();
+                })
+                .catch((error) => {
+                    alert('Error al eliminar licitador: ' + error.message);
+                });
+        }
+
+        // Actualizar campo de licitador
+        document.querySelector('#tablaLicitadores').addEventListener('input', (e) => {
+            const key = e.target.dataset.key;
+            const field = e.target.dataset.field;
+            const value = e.target.textContent;
+
+            if (key && field) {
+                const licitadorRef = ref(database, `licitadores/${key}`);
+                update(licitadorRef, { [field]: value })
+                    .then(() => {
+                        console.log('Campo actualizado:', field, value);
+                    })
+                    .catch((error) => {
+                        console.error('Error al actualizar:', error.message);
+                    });
+            }
+        });
+
+        // Manejo del formulario de licitadores
+        document.getElementById('formLicitador').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const licitador = {
+                nombre: document.getElementById('nombreLicitador').value,
+            };
+
+            guardarLicitador(licitador)
+                .then(() => {
+                    document.getElementById('messageLicitadores').innerHTML = "<p>Licitador registrado con éxito.</p>";
+                    document.getElementById('formLicitador').reset();
+                    cargarLicitadores();
+                })
+                .catch((error) => {
+                    document.getElementById('messageLicitadores').innerHTML = "<p>Error al registrar el licitador: " + error.message + "</p>";
+                });
+        });
+
         // Cargar datos al iniciar
         cargarUsuarios();
+        cargarLicitadores();
     </script>
 </body>
 </html>
