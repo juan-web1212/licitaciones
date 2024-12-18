@@ -93,3 +93,8 @@ aceptarBtn.addEventListener('click', () => {
 function limpiarTabla() {
     tablaLicitaciones.innerHTML = '';
 }
+function confirmarSalir() {
+    if (confirm('¿Está seguro de que desea salir?')) {
+        window.location.href = '../index.html';
+    }
+}
