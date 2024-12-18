@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Panel de Administración1212</h1>
+        <h1>Panel de Administracióndioooos</h1>
 
         <!-- Formulario para registrar usuarios -->
         <h2>Registrar Nuevo Usuario</h2>
@@ -107,19 +107,19 @@
         function cargarUsuarios() {
             const userRef = ref(database, 'usuarios');
             const tablaUsuarios = document.querySelector('#tablaUsuarios tbody');
-            tablaUsuarios.innerHTML = '';
+            tablaUsuarios.innerHTML = ''; // Limpiar tabla antes de recargar datos
 
             onValue(userRef, (snapshot) => {
-                tablaUsuarios.innerHTML = ''; // Limpiar tabla antes de recargar datos
                 snapshot.forEach((childSnapshot) => {
                     const user = childSnapshot.val();
                     const row = document.createElement('tr');
+                    row.setAttribute('data-key', childSnapshot.key); // Guardar el key en el atributo de la fila
                     row.innerHTML = `
-                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="username">${user.username}</td>
-                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="email">${user.email}</td>
-                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="tipo">${user.tipo}</td>
+                        <td contenteditable="true" data-field="username">${user.username}</td>
+                        <td contenteditable="true" data-field="email">${user.email}</td>
+                        <td contenteditable="true" data-field="tipo">${user.tipo}</td>
                         <td>
-                            <button onclick="eliminarUsuario('${childSnapshot.key}', this.closest('tr'))">Eliminar</button>
+                            <button onclick="eliminarUsuario('${childSnapshot.key}', this)">Eliminar</button>
                         </td>
                     `;
                     tablaUsuarios.appendChild(row);
@@ -128,14 +128,14 @@
         }
 
         // Eliminar usuario
-        function eliminarUsuario(key, row) {
+        function eliminarUsuario(key, button) {
             const userRef = ref(database, `usuarios/${key}`);
             remove(userRef)
                 .then(() => {
-                    // Eliminar la fila de la tabla
+                    // Eliminar la fila correspondiente
+                    const row = button.closest('tr'); // Obtener la fila más cercana al botón
                     row.remove(); 
                     alert('Usuario eliminado con éxito.');
-                    cargarUsuarios();
                 })
                 .catch((error) => {
                     alert('Error al eliminar usuario: ' + error.message);
@@ -144,7 +144,8 @@
 
         // Actualizar campo de usuario
         document.querySelector('#tablaUsuarios').addEventListener('input', (e) => {
-            const key = e.target.dataset.key;
+            const row = e.target.closest('tr');
+            const key = row.getAttribute('data-key');
             const field = e.target.dataset.field;
             const value = e.target.textContent;
 
@@ -194,18 +195,18 @@
         function cargarLicitadores() {
             const licitadorRef = ref(database, 'licitadores');
             const tablaLicitadores = document.querySelector('#tablaLicitadores tbody');
-            tablaLicitadores.innerHTML = '';
+            tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
 
             onValue(licitadorRef, (snapshot) => {
-                tablaLicitadores.innerHTML = ''; // Limpiar tabla antes de recargar datos
                 snapshot.forEach((childSnapshot) => {
                     const licitador = childSnapshot.val();
                     const row = document.createElement('tr');
+                    row.setAttribute('data-key', childSnapshot.key); // Guardar el key en el atributo de la fila
                     row.innerHTML = `
                         <td>${childSnapshot.key}</td>
-                        <td contenteditable="true" data-key="${childSnapshot.key}" data-field="nombre">${licitador.nombre}</td>
+                        <td contenteditable="true" data-field="nombre">${licitador.nombre}</td>
                         <td>
-                            <button onclick="eliminarLicitador('${childSnapshot.key}', this.closest('tr'))">Eliminar</button>
+                            <button onclick="eliminarLicitador('${childSnapshot.key}', this)">Eliminar</button>
                         </td>
                     `;
                     tablaLicitadores.appendChild(row);
@@ -214,14 +215,14 @@
         }
 
         // Eliminar licitador
-        function eliminarLicitador(key, row) {
+        function eliminarLicitador(key, button) {
             const licitadorRef = ref(database, `licitadores/${key}`);
             remove(licitadorRef)
                 .then(() => {
-                    // Eliminar la fila de la tabla
+                    // Eliminar la fila correspondiente
+                    const row = button.closest('tr'); // Obtener la fila más cercana al botón
                     row.remove(); 
                     alert('Licitador eliminado con éxito.');
-                    cargarLicitadores();
                 })
                 .catch((error) => {
                     alert('Error al eliminar licitador: ' + error.message);
@@ -230,7 +231,8 @@
 
         // Actualizar campo de licitador
         document.querySelector('#tablaLicitadores').addEventListener('input', (e) => {
-            const key = e.target.dataset.key;
+            const row = e.target.closest('tr');
+            const key = row.getAttribute('data-key');
             const field = e.target.dataset.field;
             const value = e.target.textContent;
 
