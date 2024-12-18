@@ -75,7 +75,7 @@ async function validarUsuario() {
 
 // Validar licitador
 async function validarLicitador() {
-    const idLicitador = document.getElementById("idLicitador").value.trim(); // Cambié el nombre del campo para buscar el ID
+    const idLicitador = document.getElementById("idLicitador").value.trim();
 
     if (!idLicitador) {
         alert("Por favor, complete el campo de ID del licitador.");
@@ -83,11 +83,13 @@ async function validarLicitador() {
     }
 
     try {
-        // Buscar por ID en lugar de nombre
+        // Buscar por ID en la base de datos
         const snapshot = await get(ref(database, `licitadores/${idLicitador}`));
         if (snapshot.exists()) {
-            // Redirigir a la página de licitador, pasando el ID como parámetro en la URL
-            window.location.href = `inicio/licitador.html?id=${idLicitador}`;
+            // Almacenar el ID en sessionStorage
+            sessionStorage.setItem("idLicitador", idLicitador);
+            // Redirigir a la página de licitador
+            window.location.href = "inicio/licitador.html";
         } else {
             alert("Licitador no encontrado.");
         }
