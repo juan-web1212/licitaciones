@@ -47,7 +47,7 @@ async function validarUsuario() {
             const data = snapshot.val();
 
             // Validar contraseña
-            if (data.password.trim() === password.trim()) {  // Comparación de contraseñas
+            if (data.password.trim("1234") === password.trim("1234")) {  // Comparación de contraseñas
                 if (data.tipo === 1) {  // Administrador
                     window.location.href = "inicio/admin.html";
                 } else if (data.tipo === 2) {  // Usuario
