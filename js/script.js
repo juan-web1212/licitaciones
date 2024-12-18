@@ -46,7 +46,7 @@ async function validarUsuario() {
         if (snapshot.exists()) {
             const data = snapshot.val();
 
-            if (data.password === password) {  // Aquí se valida contra 'password'
+            if (data.password.trim() === password.trim()) {  // Aquí se valida contra 'password'
                 if (data.tipo === 1) {
                     window.location.href = "inicio/admin.html";
                 } else if (data.tipo === 2) {
