@@ -26,9 +26,16 @@ setInterval(cambiarImagen, 4500);
 
 // Mostrar formularios
 function toggleFormulario(id) {
-    document.getElementById("formUsuario").style.display = "none";
-    document.getElementById("formLicitador").style.display = "none";
-    document.getElementById(id).style.display = "block";
+    const usuarioForm = document.getElementById("formUsuario");
+    const licitadorForm = document.getElementById("formLicitador");
+
+    if (id === "formUsuario") {
+        usuarioForm.style.display = usuarioForm.style.display === "none" ? "block" : "none";
+        licitadorForm.style.display = "none";
+    } else if (id === "formLicitador") {
+        licitadorForm.style.display = licitadorForm.style.display === "none" ? "block" : "none";
+        usuarioForm.style.display = "none";
+    }
 }
 
 // Validar usuario
