@@ -20,13 +20,6 @@ const database = getDatabase(app);
 // Obtener el ID del licitador desde sessionStorage
 const idLicitador = sessionStorage.getItem("idLicitador");
 
-if (idLicitador) {
-    obtenerNombreLicitador(idLicitador);
-} else {
-    alert("ID de licitador no encontrado. Redirigiendo...");
-    window.location.href = "../index.html"; // Redirige al inicio si no hay ID
-}
-
 // Obtener el nombre del licitador usando su ID
 async function obtenerNombreLicitador(id) {
     try {
